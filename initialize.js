@@ -1,5 +1,16 @@
 var map;
 
+
+function goHome() {
+
+ 
+  google.maps.event.addDomListener(HomeButton, 'click', function() {
+    var Home = new google.maps.LatLng(37.236752, -115.801813);
+    map.setCenter(Home);
+  });
+
+}
+
 function initialize() {
   var Area51 = new google.maps.LatLng(37.236752, -115.801813);
   var UFO = new google.maps.LatLng(37.260752, -115.801813);
@@ -24,24 +35,24 @@ function initialize() {
 
 
   var contentString1 = '<div id="content">'+
-      '<div id="siteNotice">'+
-      '</div>'+
-      '<h2 id="firstHeading" class="firstHeading">Area51</h2>'+
-      '<div id="bodyContent">'+
-      '<p>Aliens where here!</p>'+
+  '<div id="siteNotice">'+
+  '</div>'+
+  '<h2 id="firstHeading" class="firstHeading">Area51</h2>'+
+  '<div id="bodyContent">'+
+  '<p>Aliens where here!</p>'+
   
-      '</div>'+
-      '</div>';
+  '</div>'+
+  '</div>';
 
   var contentString2 = '<div id="content">'+
-      '<div id="siteNotice">'+
-      '</div>'+
-      '<h2 id="firstHeading" class="firstHeading">Landing site</h2>'+
-      '<div id="bodyContent">'+
-      '<p>The aliens landed somewhere out in the desert...!</p>'+
+  '<div id="siteNotice">'+
+  '</div>'+
+  '<h2 id="firstHeading" class="firstHeading">Landing site</h2>'+
+  '<div id="bodyContent">'+
+  '<p>The aliens landed somewhere out in the desert...!</p>'+
   
-      '</div>'+
-      '</div>';  
+  '</div>'+
+  '</div>';  
 
   var infowindow1 = new google.maps.InfoWindow({
     content: contentString1,
@@ -76,6 +87,8 @@ function initialize() {
   google.maps.event.addListener(marker2, 'click', function() {
     infowindow2.open(map,marker2);
   })     
+
+
 
 
 }

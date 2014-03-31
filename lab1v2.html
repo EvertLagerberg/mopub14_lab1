@@ -12,6 +12,7 @@
 
 - set colors to periphery elements if available
 - local caching of resources
+- set tilt?
 
 
 
@@ -66,18 +67,39 @@
     margin: 0px;
     padding: 0px
   }
+
+  #HomeButton {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    margin-left: -180px;
+    z-index: 5;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #999;
+  }
   </style>
+
+
+
 
   <!-- Load Map -->
   <script src="https://maps.googleapis.com/maps/api/js?AIzaSyBXpGBUg6st-2CP2-t-CwV-qRiMU2i7Z9g&sensor=false"></script>
   
   <!-- MAIN SCRIPT -->
+  <script type="text/javascript" src="goHome.js" charset="utf-8"></script>
   <script type="text/javascript" src="initialize.js" charset="utf-8"></script>
 
 
 </head>
 
 <body>
-  <div id="map-canvas" style="position:absolute;top:0;bottom:50px;left:0;right:0;">></div>
+
+  <div id="HomeButton">
+   <input type="button" value="Home" onclick="goHome();"></input>
+  </div>
+  <div id="map-canvas" style="position:absolute;top:0;bottom:50px;left:0;right:0;"></div>
+
+  </div>
 </body>
 </html>
