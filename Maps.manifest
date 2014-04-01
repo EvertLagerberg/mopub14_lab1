@@ -1,19 +1,27 @@
 CACHE MANIFEST
-/mopub/lab1/lab1v2.html
+/mopub/lab1v2.html
 
-/mopub/lab1/initialize.js
+/mopub/initialize.js
 
-/mopub/lab1/Icon.png
+/mopub/Icon.png
 
-/mopub/lab1/apple-touch-startup-image-320x460.png
+/mopub/apple-touch-startup-image-320x460.png
 
-/mopub/lab1/apple-touch-startup-image-640x920.png
+/mopub/apple-touch-startup-image-640x920.png
+
+/mopub/apple-touch-startup-image-640x1096.png
 
 http://maps.google.com/maps/api/js?sensor=false
 
-/mopub/lab1/add2home.css
+http://googleapis.com
 
-/mopub/lab1/add2home.js
+http://googleusercontent.com
+
+http://gstatic.com
+
+/mopub/add2home.css
+
+/mopub/add2home.js
 
 https://maps.googleapis.com/maps/api/js?AIzaSyBXpGBUg6st-2CP2-t-CwV-qRiMU2i7Z9g&sensor=false
 

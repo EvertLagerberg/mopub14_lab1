@@ -1,3 +1,5 @@
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzZfFvXIrXkEBtJXI_fvQwEl9MVLi0rpY&sensor=false";
+
 var map;
 
 function initialize() {
@@ -40,7 +42,4 @@ function initialize() {
 
 
 }
-
-
-
 google.maps.event.addDomListener(window, 'load', initialize);
