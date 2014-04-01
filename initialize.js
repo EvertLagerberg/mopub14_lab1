@@ -1,6 +1,5 @@
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzZfFvXIrXkEBtJXI_fvQwEl9MVLi0rpY&sensor=false";
-
 var map;
+<<<<<<< HEAD
 
 function log(msg) {
     setTimeout(function() {
@@ -10,6 +9,14 @@ function log(msg) {
  
 
 function goHome() {
+=======
+var Area51 = new google.maps.LatLng(37.236752, -115.801813);
+var UFO = new google.maps.LatLng(37.260752, -115.801813);
+
+function goHome() {
+
+
+>>>>>>> cd1e1b642e2beebc895fa935c17ecc49fa8321a8
   google.maps.event.addDomListener(HomeButton, 'click', function() {
     var Home = new google.maps.LatLng(37.236752, -115.801813);
     map.setCenter(Home);
@@ -33,8 +40,6 @@ function zoomout() {
  
 
 function initialize() {
-  var Area51 = new google.maps.LatLng(37.236752, -115.801813);
-  var UFO = new google.maps.LatLng(37.260752, -115.801813);
   var mapOptions = {
     zoom: 13,
     center: Area51,
@@ -113,4 +118,7 @@ function initialize() {
 
 
 }
+
+
+
 google.maps.event.addDomListener(window, 'load', initialize);
