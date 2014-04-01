@@ -1,17 +1,7 @@
 CACHE MANIFEST
-<<<<<<< HEAD
-/mopub/lab1v2.html
 
-/mopub/initialize.js
+/mopub/lab1.0/apple-touch-startup-image-640x1096.png
 
-/mopub/Icon.png
-
-/mopub/apple-touch-startup-image-320x460.png
-
-/mopub/apple-touch-startup-image-640x920.png
-
-/mopub/apple-touch-startup-image-640x1096.png
-=======
 /mopub/lab1.0/lab1v2.html
 
 /mopub/lab1.0/initialize.js
@@ -21,25 +11,12 @@ CACHE MANIFEST
 /mopub/lab1.0/apple-touch-startup-image-320x460.png
 
 /mopub/lab1.0/apple-touch-startup-image-640x920.png
->>>>>>> 079e8d6ff10494090fe6c5a61d582a1fe8b101f7
 
-
-<<<<<<< HEAD
-http://googleapis.com
-
-http://googleusercontent.com
-
-http://gstatic.com
-
-/mopub/add2home.css
-
-/mopub/add2home.js
-=======
 /mopub/lab1.0/add2home.css
 
 /mopub/lab1.0/add2home.js
 
->>>>>>> 079e8d6ff10494090fe6c5a61d582a1fe8b101f7
+
 
 
 
