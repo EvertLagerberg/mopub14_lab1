@@ -78,6 +78,30 @@
     padding: 5px;
     border: 1px solid #999;
   }
+  
+  #zoomin {
+    position: absolute;
+    bottom: 35px;
+    left: 0px;
+    z-index: 5;
+    background-color: #c4c8df;
+    width: 100px;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+  }
+  
+   #zoomout {
+    position: absolute;
+    bottom: 5px;
+    left: 0px;
+    z-index: 5;
+    background-color: #c4c8df;
+    width: 100px;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+  }
   </style>
 
 
@@ -89,7 +113,9 @@
   <!-- MAIN SCRIPT -->
   <script type="text/javascript" src="goHome.js" charset="utf-8"></script>
   <script type="text/javascript" src="initialize.js" charset="utf-8"></script>
-
+  <script>
+document.getElementById( "zoomin" ).onclick = null;
+</script>
 
 </head>
 
@@ -99,7 +125,8 @@
    <input type="button" value="Home" onclick="goHome();"></input>
   </div>
   <div id="map-canvas" style="position:absolute;top:0;bottom:50px;left:0;right:0;"></div>
+  <div id="zoomout" onclick="zoomout(zoomout)">ZOOM OUT</div>
+  <div id="zoomin" onclick="zoomin()"> ZOOM IN </div>
 
-  </div>
 </body>
 </html>

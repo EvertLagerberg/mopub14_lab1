@@ -2,16 +2,35 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzZfFvXIrXkEBtJXI_fvQwEl9
 
 var map;
 
+function log(msg) {
+    setTimeout(function() {
+        throw new Error(msg);
+    }, 0);
+}
+ 
 
 function goHome() {
-
- 
   google.maps.event.addDomListener(HomeButton, 'click', function() {
     var Home = new google.maps.LatLng(37.236752, -115.801813);
     map.setCenter(Home);
+     alert('home'); 
   });
 
 }
+
+function zoomin() {
+   var currentZoomLevel = map.getZoom();
+   if(currentZoomLevel != 0){
+     map.setZoom(currentZoomLevel + 1);}   
+  }
+
+function zoomout() {
+   var currentZoomLevel = map.getZoom();
+   if(currentZoomLevel != 0){
+     map.setZoom(currentZoomLevel - 1);}   
+  }
+ 
+ 
 
 function initialize() {
   var Area51 = new google.maps.LatLng(37.236752, -115.801813);
