@@ -1,9 +1,10 @@
 var map;
-
+var Area51 = new google.maps.LatLng(37.236752, -115.801813);
+var UFO = new google.maps.LatLng(37.260752, -115.801813);
 
 function goHome() {
 
- 
+
   google.maps.event.addDomListener(HomeButton, 'click', function() {
     var Home = new google.maps.LatLng(37.236752, -115.801813);
     map.setCenter(Home);
@@ -12,8 +13,6 @@ function goHome() {
 }
 
 function initialize() {
-  var Area51 = new google.maps.LatLng(37.236752, -115.801813);
-  var UFO = new google.maps.LatLng(37.260752, -115.801813);
   var mapOptions = {
     zoom: 13,
     center: Area51,
