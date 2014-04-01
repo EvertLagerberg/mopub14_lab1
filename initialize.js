@@ -1,29 +1,16 @@
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzZfFvXIrXkEBtJXI_fvQwEl9MVLi0rpY&sensor=false";
+
 var map;
-<<<<<<< HEAD
-
-function log(msg) {
-    setTimeout(function() {
-        throw new Error(msg);
-    }, 0);
-}
- 
 
 function goHome() {
-=======
-var Area51 = new google.maps.LatLng(37.236752, -115.801813);
-var UFO = new google.maps.LatLng(37.260752, -115.801813);
-
-function goHome() {
-
-
->>>>>>> cd1e1b642e2beebc895fa935c17ecc49fa8321a8
-  google.maps.event.addDomListener(HomeButton, 'click', function() {
     var Home = new google.maps.LatLng(37.236752, -115.801813);
     map.setCenter(Home);
-     alert('home'); 
-  });
-
-}
+  }
+  
+function goKTH() {
+    var Home = new google.maps.LatLng(59.34694918843402, 18.07322323322296);
+    map.setCenter(Home);
+  }
 
 function zoomin() {
    var currentZoomLevel = map.getZoom();
@@ -36,10 +23,36 @@ function zoomout() {
    if(currentZoomLevel != 0){
      map.setZoom(currentZoomLevel - 1);}   
   }
+  
+function goUp() {
+   var oldLoc = map.getCenter();
+   var newLoc = new google.maps.LatLng(oldLoc.lat() + 0.05, oldLoc.lng());
+   map.setCenter(newLoc);   
+  }
+  
+function goDown() {
+   var oldLoc = map.getCenter();
+   var newLoc = new google.maps.LatLng(oldLoc.lat() - 0.05, oldLoc.lng());
+   map.setCenter(newLoc);   
+  }
+
+function goLeft() {
+   var oldLoc = map.getCenter();
+   var newLoc = new google.maps.LatLng(oldLoc.lat(), oldLoc.lng() - 0.05);
+   map.setCenter(newLoc);   
+  }
+  
+function goRight() {
+   var oldLoc = map.getCenter();
+   var newLoc = new google.maps.LatLng(oldLoc.lat(), oldLoc.lng() + 0.05);
+   map.setCenter(newLoc);   
+  }
  
  
 
 function initialize() {
+  var Area51 = new google.maps.LatLng(37.236752, -115.801813);
+  var UFO = new google.maps.LatLng(37.260752, -115.801813);
   var mapOptions = {
     zoom: 13,
     center: Area51,
@@ -48,11 +61,7 @@ function initialize() {
     mapTypeControl: true,
     mapTypeControlOptions: {
       style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
-      position: google.maps.ControlPosition.RIGHT_TOP
-    },
-    panControl: true,
-    panControlOptions: {
-      position: google.maps.ControlPosition.RIGHT_TOP
+      position: google.maps.ControlPosition.LEFT_TOP
     }
   }
 
@@ -118,7 +127,4 @@ function initialize() {
 
 
 }
-
-
-
 google.maps.event.addDomListener(window, 'load', initialize);
