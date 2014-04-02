@@ -24,8 +24,54 @@ function goTo(div,location) {
     map.setCenter(newlocation);
     map.setZoom(13);
   });
+function goHome() {
+    var Home = new google.maps.LatLng(37.236752, -115.801813);
+    map.setCenter(Home);
+  }
+  
+function goKTH() {
+    var Home = new google.maps.LatLng(59.34694918843402, 18.07322323322296);
+    map.setCenter(Home);
+  }
 
 }
+function zoomin() {
+   var currentZoomLevel = map.getZoom();
+   if(currentZoomLevel != 0){
+     map.setZoom(currentZoomLevel + 1);}   
+  }
+
+function zoomout() {
+   var currentZoomLevel = map.getZoom();
+   if(currentZoomLevel != 0){
+     map.setZoom(currentZoomLevel - 1);}   
+  }
+  
+function goUp() {
+   var oldLoc = map.getCenter();
+   var newLoc = new google.maps.LatLng(oldLoc.lat() + 0.05, oldLoc.lng());
+   map.setCenter(newLoc);   
+  }
+  
+function goDown() {
+   var oldLoc = map.getCenter();
+   var newLoc = new google.maps.LatLng(oldLoc.lat() - 0.05, oldLoc.lng());
+   map.setCenter(newLoc);   
+  }
+
+function goLeft() {
+   var oldLoc = map.getCenter();
+   var newLoc = new google.maps.LatLng(oldLoc.lat(), oldLoc.lng() - 0.05);
+   map.setCenter(newLoc);   
+  }
+  
+function goRight() {
+   var oldLoc = map.getCenter();
+   var newLoc = new google.maps.LatLng(oldLoc.lat(), oldLoc.lng() + 0.05);
+   map.setCenter(newLoc);   
+  }
+ 
+ 
 
 function initialize() {
   var mapOptions = {
@@ -36,11 +82,7 @@ function initialize() {
     mapTypeControl: true,
     mapTypeControlOptions: {
       style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
-      position: google.maps.ControlPosition.RIGHT_TOP
-    },
-    panControl: true,
-    panControlOptions: {
-      position: google.maps.ControlPosition.RIGHT_TOP
+      position: google.maps.ControlPosition.LEFT_TOP
     }
   }
 
