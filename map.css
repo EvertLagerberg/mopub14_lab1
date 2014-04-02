@@ -1,0 +1,103 @@
+
+  html, body, #map-canvas {
+    height: 100%;
+    margin: 0px;
+    padding: 0px
+  }
+
+  #goKTH {
+  	position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 5;
+    background-color: #6075f1;
+    width: 100px;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+  }
+  
+   #HomeButton {
+  	position: absolute;
+    bottom: 5px;
+    right: 5px;
+    z-index: 5;
+    background-color: #6075f1;
+    width: 100px;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+  }
+  
+  #zoomin {
+    position: absolute;
+    bottom: 35px;
+    left: 5px;
+    z-index: 5;
+    background-color: #c4c8df;
+    width: 100px;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+  }
+  
+   #zoomout {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    z-index: 5;
+    background-color: #c4c8df;
+    width: 100px;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+  }
+  
+   #goUp {
+    position: absolute;
+    top: 5px;
+    left: 145px;
+    z-index: 5;
+    background-color: #f9ffcc;
+    width: 20px;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+  }
+  
+   #goDown {
+    position: absolute;
+    bottom: 5px;
+    left: 145px;
+    z-index: 5;
+    background-color: #f9ffcc;
+    width: 20px;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+  }
+  
+   #goRight {
+    position: absolute;
+    bottom: 50%;
+    right: 5px;
+    z-index: 5;
+    background-color: #f9ffcc;
+    height: 20px;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+    
+  }
+  
+   #goLeft {
+    position: absolute;
+    bottom: 50%;
+    left: 5px;
+    z-index: 5;
+    background-color: #f9ffcc;
+    height: 20px;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+  }
