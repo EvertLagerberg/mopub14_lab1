@@ -1,21 +1,10 @@
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzZfFvXIrXkEBtJXI_fvQwEl9MVLi0rpY&sensor=true";
-
 var map;
 var Area51 = new google.maps.LatLng(37.236752, -115.801813);
 var UFO = new google.maps.LatLng(37.260752, -115.801813);
 var KTH = new google.maps.LatLng(59.34989190484124,18.069108724594116);
-console.log(KTH);
+var geo;
 
 
-  // Try HTML5 geolocation
-  if(navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      console.log("Hej");
-      var geo = new google.maps.LatLng(position.coords.latitude,
-       position.coords.longitude);
-    }
-    )
-  };
 
     function goTo(div,location) {
 
@@ -75,7 +64,50 @@ console.log(KTH);
 
 
 
+
+
+
+      function geoLocation() {
+
+              // Try HTML5 geolocation
+      if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          console.log("1");
+          var navigator = new google.maps.LatLng(position.coords.latitude,
+           position.coords.longitude);
+          console.log(navigator);
+
+        }
+        )
+      };
+      
+
+
+        
+         var marker4 = new google.maps.Marker({
+          map:map,
+          draggable:false,
+          animation: google.maps.Animation.DROP,
+          position: navigator,
+          title: "myPosition"
+        });
+
+        map.setCenter(navigator);
+
+      }
+
+
+
+
+
+
        function initialize() {
+      console.log("1");
+
+
+
+
+      console.log("2");
         var mapOptions = {
           zoom: 13,
           center: Area51,
@@ -163,9 +195,9 @@ console.log(KTH);
           position: KTH,
           title: "KTH"
         });
+        console.log("3");
+
         
-
-
         google.maps.event.addListener(marker1, 'click', function() {
           infowindow1.open(map,marker1);
         })
@@ -176,7 +208,8 @@ console.log(KTH);
         google.maps.event.addListener(marker3, 'click', function() {
           infowindow3.open(map,marker3);
         })      
-
+        console.log("4");
+  
 
 
 

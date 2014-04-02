@@ -64,116 +64,13 @@
 
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no, minimal-ui">
   <meta charset="utf-8">
-  <style>
-  html, body, #map-canvas {
-    height: 100%;
-    margin: 0px;
-    padding: 0px
-  }
 
-  #goKTH {
-  	position: absolute;
-    top: 5px;
-    right: 5px;
-    z-index: 5;
-    background-color: #6075f1;
-    width: 100px;
-    padding: 5px;
-    border: 1px solid #999;
-    text-align: center;
-  }
-  
-   #HomeButton {
-  	position: absolute;
-    bottom: 5px;
-    right: 5px;
-    z-index: 5;
-    background-color: #6075f1;
-    width: 100px;
-    padding: 5px;
-    border: 1px solid #999;
-    text-align: center;
-  }
-  
-  #zoomin {
-    position: absolute;
-    bottom: 35px;
-    left: 5px;
-    z-index: 5;
-    background-color: #c4c8df;
-    width: 100px;
-    padding: 5px;
-    border: 1px solid #999;
-    text-align: center;
-  }
-  
-   #zoomout {
-    position: absolute;
-    bottom: 5px;
-    left: 5px;
-    z-index: 5;
-    background-color: #c4c8df;
-    width: 100px;
-    padding: 5px;
-    border: 1px solid #999;
-    text-align: center;
-  }
-  
-   #goUp {
-    position: absolute;
-    top: 5px;
-    left: 145px;
-    z-index: 5;
-    background-color: #f9ffcc;
-    width: 20px;
-    padding: 5px;
-    border: 1px solid #999;
-    text-align: center;
-  }
-  
-   #goDown {
-    position: absolute;
-    bottom: 5px;
-    left: 145px;
-    z-index: 5;
-    background-color: #f9ffcc;
-    width: 20px;
-    padding: 5px;
-    border: 1px solid #999;
-    text-align: center;
-  }
-  
-   #goRight {
-    position: absolute;
-    bottom: 50%;
-    right: 5px;
-    z-index: 5;
-    background-color: #f9ffcc;
-    height: 20px;
-    padding: 5px;
-    border: 1px solid #999;
-    text-align: center;
-    
-  }
-  
-   #goLeft {
-    position: absolute;
-    bottom: 50%;
-    left: 5px;
-    z-index: 5;
-    background-color: #f9ffcc;
-    height: 20px;
-    padding: 5px;
-    border: 1px solid #999;
-    text-align: center;
-  }
-  </style>
 
 
 
 
   <!-- Load Map -->
-  <script src="https://maps.googleapis.com/maps/api/js?AIzaSyBXpGBUg6st-2CP2-t-CwV-qRiMU2i7Z9g&sensor=false"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?AIzaSyBXpGBUg6st-2CP2-t-CwV-qRiMU2i7Z9g&sensor=true"></script>
   
   <!-- MAIN SCRIPT -->
   <script type="text/javascript" src="initialize.js" charset="utf-8"></script>
@@ -188,7 +85,7 @@ document.getElementById( "zoomin" ).onclick = null;
 <body>
 
   <div id="HomeButton" value="Home" onclick="goHome();">HOME  </div>
-  <div id="goKTH" onclick="goKTH();">KTH  </div>
+  <div id="goKTH" onclick="geoLocation();">KTH  </div>
   <div id="map-canvas" style="position:absolute;top:0;bottom:50px;left:0;right:0;"></div>
   <div id="zoomout" onclick="zoomout()">ZOOM OUT</div>
   <div id="zoomin" onclick="zoomin()"> ZOOM IN </div>
