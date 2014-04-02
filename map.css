@@ -17,6 +17,18 @@
     text-align: center;
   }
   
+   #position{
+  	position: absolute;
+    top: 35px;
+    right: 5px;
+    z-index: 5;
+    background-color: #6075f1;
+    width: 100px;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+  }
+  
    #HomeButton {
   	position: absolute;
     bottom: 5px;
