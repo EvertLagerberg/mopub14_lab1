@@ -78,6 +78,18 @@
     padding: 5px;
     border: 1px solid #999;
   }
+
+
+    #KTHButton {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    margin-left: -120px;
+    z-index: 5;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #999;
+  }
   </style>
 
 
@@ -87,7 +99,7 @@
   <script src="https://maps.googleapis.com/maps/api/js?AIzaSyBXpGBUg6st-2CP2-t-CwV-qRiMU2i7Z9g&sensor=false"></script>
   
   <!-- MAIN SCRIPT -->
-  <script type="text/javascript" src="goHome.js" charset="utf-8"></script>
+  
   <script type="text/javascript" src="initialize.js" charset="utf-8"></script>
 
 
@@ -96,8 +108,13 @@
 <body>
 
   <div id="HomeButton">
-   <input type="button" value="Home" onclick="goHome();"></input>
+   <input type="button" value="Home" onclick="goTo(HomeButton, Area51);"></input>
   </div>
+
+  <div id="KTHButton">
+   <input type="button" value="KTH" onclick="goTo(KTHButton, KTH);"></input>
+  </div>
+
   <div id="map-canvas" style="position:absolute;top:0;bottom:50px;left:0;right:0;"></div>
 
   </div>
