@@ -4,6 +4,17 @@ var UFO = new google.maps.LatLng(37.260752, -115.801813);
 var KTH = new google.maps.LatLng(59.34989190484124,18.069108724594116);
 var geo;
 
+
+
+    function goTo(div,location) {
+
+
+      google.maps.event.addDomListener(div, 'click', function() {
+        var newlocation = location;
+        map.setCenter(newlocation);
+        map.setZoom(13);
+      });
+    }
       function goHome() {
         var Home = new google.maps.LatLng(37.236752, -115.801813);
         map.setCenter(Home);
@@ -64,9 +75,7 @@ var geo;
           console.log("1");
           var navigator = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
           map.setCenter(navigator); 
-
-        })
-        var marker4 = new google.maps.Marker({
+          var marker4 = new google.maps.Marker({
           position:navigator,
           map:map,
           draggable:false,
@@ -74,6 +83,9 @@ var geo;
           position: navigator,
           title: "myPosition"
         });
+
+        })
+        
 
         
         
