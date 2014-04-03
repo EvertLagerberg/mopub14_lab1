@@ -1,18 +1,35 @@
 <!--
 
   FIXAT:
+
+  1:
+  - There are are some intrinsic controllers for zooming and panning. Replace them with your own so you can navigate using buttons on the screen.
+  - Try the different map types; roadmap, satellite, hybrid.
+  - Investigate animations (like drop and bounce), as well as dragabilty by setting one marker as draggable and one as not. 
+- Examine the 45° tilt version of the map and how to get it working (won’t work with ROADMAP map type).
+
+
+  2:
   - make the app display a site-specified icon on the desktop
   - hiding the url-bar
   - control viewport, to provide for a full screen experience
   - support of "apple-touch-startup-image" or similar for a splash-screen while loading the content
   - give a notification if a site offers to "install" it as web-app
   - hide status bar
+  - local caching of resources?
+
+  3:
+  - Set a marker at a favorite location of each of the group members, with some kind of info on what the user could expect to see.
+  - In more detail; try get hold of your position (if you phone allows positioning into to be shared with the browser, it probably won’t work on your PC browser), and center the map there.
+  - Investigate how to make a custom marker and see if it works on different browsers.
+
 
   ATT GÖRA:
 
-- set colors to periphery elements if available
-- local caching of resources?
-- set tilt?
+- set colors to periphery elements if available???
+
+- Make some <input type=”button” />  buttons; typically a “here” button and and a couple of “there” buttons   outside of the map area
+
 
 
 
@@ -83,14 +100,15 @@
 
   <div id="HomeButton" value="Home" onclick="goHome();">HOME </div>
   <div id="goKTH" onclick="goKTH();">KTH  </div>
+  <div id="goSantiago" onclick="goSantiago();">Chile Tilted  </div>
   <div id="position" onclick="geoLocation();">Where am I?</div>
   <div id="map-canvas" style="position:absolute;top:0;bottom:50px;left:0;right:0;"></div>
   <div id="zoomout" onclick="zoomout()">ZOOM OUT</div>
   <div id="zoomin" onclick="zoomin()"> ZOOM IN </div>
   <div id="goUp" onclick="goUp()"> N </div>
   <div id="goDown" onclick="goDown()"> S </div>
-  <div id="goLeft" onclick="goLeft()"> L </div>
-  <div id="goRight" onclick="goRight()"> R </div>
+  <div id="goLeft" onclick="goLeft()"> W </div>
+  <div id="goRight" onclick="goRight()"> E </div>
 
 </body>
 </html>
