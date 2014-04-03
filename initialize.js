@@ -1,4 +1,5 @@
 var map;
+var Santiago = new google.maps.LatLng(-33.448575, -70.664123);
 var Area51 = new google.maps.LatLng(37.236752, -115.801813);
 var UFO = new google.maps.LatLng(37.260752, -115.801813);
 var KTH = new google.maps.LatLng(59.34989190484124,18.069108724594116);
@@ -6,25 +7,20 @@ var geo;
 
 
 
-    function goTo(div,location) {
 
-
-      google.maps.event.addDomListener(div, 'click', function() {
-        var newlocation = location;
-        map.setCenter(newlocation);
-        map.setZoom(13);
-      });
-    }
       function goHome() {
-        var Home = new google.maps.LatLng(37.236752, -115.801813);
-        map.setCenter(Home);
+        map.setCenter(Area51);
       }
 
       function goKTH() {
-        var Home = new google.maps.LatLng(59.34694918843402, 18.07322323322296);
-        map.setCenter(Home);
+        map.setCenter(KTH);
       }
 
+      function goSantiago() {
+        map.setCenter(Santiago);
+        map.setTilt(45);
+        map.setZoom(20);
+      }      
     
     function zoomin() {
      var currentZoomLevel = map.getZoom();
@@ -74,10 +70,22 @@ var geo;
         navigator.geolocation.getCurrentPosition(function(position) {
           console.log("1");
           var navigator = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-          map.setCenter(navigator); 
+          map.setCenter(navigator);
+
+          var alienMarker = {
+            path: 'M 375,8.5 C 226.5,8.5 21.5,102.2 21.5,346 C 21.5,346.8 21.5,347.7 21.5,348.5 C 23.2,591.2 270.1,891.5 375,891.5 C 480.3,891.5 728.5,589.8 728.5,346 C 728.5,102.2 523.5,8.5 375,8.5 z M 57,367.5 C 230,367.5 355,489.5 355,672.5 C 174,672.5 57,555.5 57,367.5 z M 699,367.5 C 699,555.5 579.6,672.5 395,672.5 C 395,489.5 522.5,367.5 699,367.5 z',
+            fillColor: 'orange',
+            fillOpacity: 0.8,
+            scale: 0.05,
+            strokeColor: 'gold',
+            strokeWeight: 1
+          };
+
+           
           var marker4 = new google.maps.Marker({
           position:navigator,
           map:map,
+          icon:alienMarker,
           draggable:false,
           animation: google.maps.Animation.DROP,
           position: navigator,
@@ -105,7 +113,7 @@ var geo;
 
       console.log("2");
         var mapOptions = {
-          zoom: 13,
+          zoom:13,
           center: Area51,
           mapTypeId: 'satellite',
           disableDefaultUI: true,
