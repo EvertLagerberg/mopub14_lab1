@@ -6,6 +6,34 @@
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+	
+	 <script>
+    // Set default transitions.
+    $.mobile.defaultPageTransition = "none";
+    $.mobile.defaultDialogTransition = "none";
+
+    // Function to make it easier to define swipe events.
+    function swipeBetween(left, right)
+    {
+        $(document).on("swipeleft", left, function() {
+            $.mobile.changePage(
+                right,
+                { transition: "none" });
+        });
+        $(document).on("swiperight", right, function() {
+            $.mobile.changePage(
+                left,
+                { transition: "none", reverse: true });
+        });
+    }
+
+    // Set up swipe between pages.
+    swipeBetween("#Wolf", "#Tribal");
+    swipeBetween("#Tribal", "#Cross");
+    swipeBetween("#Cross", "#Cars");
+    swipeBetween("#Cars", "#Nerdy");
+    swipeBetween("#Nerdy", "#Wolf");
+</script>
 
     <link rel="stylesheet" href="imageview.css">
 
