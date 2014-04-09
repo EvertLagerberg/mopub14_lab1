@@ -42,16 +42,33 @@
 <div data-role="page" id="page-contents">
         <div data-role="header" data-position="fixed">
             <h1>Tattoo Gallery</h1>
-            <a href="#Setting"
-            	data-role="button"
+             <a href="#Setting"
+             	data-theme="e"
+                data-role="button"
+                data-rel="popup"
                 class="ui-btn-right"
-                data-rel="dialog"
-                data-theme="e"
-                data-icon="gear">Select theme</a>
+                data-icon="gear"
+                data-transition="pop"
+                data-position-to="window">Select theme</a>
         </div>
-        <div data-role="content" data-theme="a">
+     
+        <div data-role="content" data-theme="a">  
+        
+         <!-- Popup 1 -->
+        <div data-role="popup" id="Setting">
+            <a href="#" data-rel="back" data-role="button"
+            data-icon="delete" data-iconpos="notext"
+            class="ui-btn-right">Close</a>
+            <div data-role="header" data-nobackbtn="true">
+                <h1>Theme</h1>
+            </div>
+            <div data-role="content">
+            	<p>Made it!!</p>
+            </div>
+            
+            
+        </div> 
             <ul data-role="listview" data-inset="true">
-
                 <li><a href="#Wolf">
                 <img src="http://www.findyourtattoo.net/wp-content/uploads/2013/05/Wolf-Tribal-Tattoo.jpg">
                 Wolf
@@ -203,14 +220,6 @@
         <p>I live in Norrtälje with my girl, my son and my daughter</p>
         </div>
 </div>
-
-<div data-role="dialog" id="Setting">
-        <div data-role="header" data-position="fixed">
-            <h1>Select theme</h1>
-        </div>
-        <div data-role="content">
-        <p>HEJ</p>
-        </div>
 </div>
 
 
