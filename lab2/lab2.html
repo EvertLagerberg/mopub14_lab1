@@ -9,6 +9,35 @@
 
     <link rel="stylesheet" href="imageview.css">
 
+    <script>
+    // Function to make it easier to define swipe events.
+    function swipeBetween(pages, i, j)
+    {
+        var left = '#' + pages[i].id;
+        var right = '#' + pages[j].id;
+        $(document).on('swipeleft', left, function() {
+            $.mobile.changePage(
+                right,
+                { transition: 'slide' });
+        });
+        $(document).on('swiperight', right, function() {
+            $.mobile.changePage(
+                left,
+                { transition: 'slide', reverse: true });
+        });
+    }
+/*
+    // Set up swipe between all pages.
+    var pages = $('[data-role="page"]');
+    for (var i = 0; i < pages.length - 1; ++i)
+    {
+        swipeBetween(pages, i, i + 1);
+    }
+    swipeBetween(pages, i, 0);
+*/
+    </script>
+
+
 </head>
 <body>
 <div data-role="page" id="page-contents">
@@ -106,6 +135,9 @@
         <p>We are Evert Lagerberg and Tommy Roshult</p>
         </div>
 </div>
+
+
+
     
 
     
