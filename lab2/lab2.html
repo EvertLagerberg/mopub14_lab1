@@ -33,6 +33,60 @@
     swipeBetween("#Cross", "#Cars");
     swipeBetween("#Cars", "#Nerdy");
     swipeBetween("#Nerdy", "#Wolf");
+    
+    $.mobile.changeGlobalTheme = function(theme)
+{
+    // These themes will be cleared, add more
+    // swatch letters as needed.
+    var themes = " a b c d e";
+
+    // Updates the theme for all elements that match the
+    // CSS selector with the specified theme class.
+    function setTheme(cssSelector, themeClass, theme)
+    {
+        $(cssSelector)
+            .removeClass(themes.split(" ").join(" " + themeClass + "-"))
+            .addClass(themeClass + "-" + theme)
+            .attr("data-theme", theme);
+    }
+
+    // Add more selectors/theme classes as needed.
+    setTheme(".ui-mobile-viewport", "ui-overlay", theme);
+    setTheme("[data-role='page']", "ui-body", theme);
+    setTheme("[data-role='content']", "ui-body", theme);
+    setTheme("[data-role='header']", "ui-bar", theme);
+    setTheme("[data-role='listview'] > li", "ui-bar", theme);
+    setTheme(".ui-btn", "ui-btn-up", theme);
+    setTheme(".ui-btn", "ui-btn-hover", theme);
+    setTheme(".ui-body-c", "ui-btn-hover", theme);
+	};
+	
+	 $.mobile.changeToStandardTheme = function()
+{
+    // These themes will be cleared, add more
+    // swatch letters as needed.
+    var themes = " a b c d e";
+
+    // Updates the theme for all elements that match the
+    // CSS selector with the specified theme class.
+    function setTheme(cssSelector, themeClass, theme)
+    {
+        $(cssSelector)
+            .removeClass(themes.split(" ").join(" " + themeClass + "-"))
+            .addClass(themeClass + "-" + theme)
+            .attr("data-theme", theme);
+    }
+
+    // Add more selectors/theme classes as needed.
+    setTheme(".ui-mobile-viewport", "ui-overlay", "a");
+    setTheme("[data-role='page']", "ui-body", "b");
+    setTheme("[data-role='content']", "ui-body", "a");
+    setTheme("[data-role='header']", "ui-bar", "a");
+    setTheme("[data-role='listview'] > li", "ui-bar", "b");
+    setTheme(".ui-btn", "ui-btn-up", "a");
+    setTheme(".ui-btn", "ui-btn-hover", "a");
+    setTheme(".ui-body-c", "ui-btn-hover", "a");
+	};
 </script>
 
     <link rel="stylesheet" href="imageview.css">
@@ -52,7 +106,7 @@
                 data-position-to="window">Select theme</a>
         </div>
      
-        <div data-role="content" data-theme="a">  
+        <div data-role="content">  
         
          <!-- Popup 1 -->
         <div data-role="popup" id="Setting">
@@ -63,7 +117,13 @@
                 <h1>Theme</h1>
             </div>
             <div data-role="content">
-            	<p>Made it!!</p>
+           		 <a href="#" onclick='$.mobile.changeToStandardTheme("a")' data-role="button" data-theme="b">Standard</a>
+
+            	<a href="#" onclick='$.mobile.changeGlobalTheme("a")' data-role="button" data-theme="b">Theme A</a>
+            	<a href="#" onclick='$.mobile.changeGlobalTheme("b")' data-role="button" data-theme="b">Theme B</a>
+            	<a href="#" onclick='$.mobile.changeGlobalTheme("c")' data-role="button" data-theme="b">Theme C</a>
+            	<a href="#" onclick='$.mobile.changeGlobalTheme("d")' data-role="button" data-theme="b">Theme D</a>
+            	<a href="#" onclick='$.mobile.changeGlobalTheme("e")' data-role="button" data-theme="b">Theme E</a>
             </div>
             
             
@@ -96,7 +156,7 @@
             <a href="#page-contents"
             	data-role="button"
                 class="ui-btn-left"
-                data-theme="e"
+              
                 data-icon="arrow-l">back</a>
         </div>
         <div data-role="content">
@@ -110,7 +170,6 @@
            <a href="#page-contents"
             	data-role="button"
                 class="ui-btn-left"
-                data-theme="e"
                 data-icon="arrow-l">back</a>
         </div>
         <div data-role="content">
@@ -124,7 +183,6 @@
             <a href="#page-contents"
             	data-role="button"
                 class="ui-btn-left"
-                data-theme="e"
                 data-icon="arrow-l">back</a>
         </div>
         <div data-role="content">
@@ -138,7 +196,6 @@
             <a href="#page-contents"
             	data-role="button"
                 class="ui-btn-left"
-                data-theme="e"
                 data-icon="arrow-l">back</a>
         </div>
         <div data-role="content">
@@ -152,7 +209,6 @@
             <a href="#page-contents"
             	data-role="button"
                 class="ui-btn-left"
-                data-theme="e"
                 data-icon="arrow-l">back</a>
         </div>
         <div data-role="content">
@@ -166,7 +222,6 @@
             <a href="#page-contents"
                 data-role="button"
                 class="ui-btn-left"
-                data-theme="e"
                 data-icon="arrow-l">Back</a>
         </div>
         <div data-role="content">
@@ -220,15 +275,6 @@
         <p>I live in Norrtälje with my girl, my son and my daughter</p>
         </div>
 </div>
-</div>
-
-
-
-    
-
-    
-    
-    
-    
+</div>  
 </body>
 </html>
