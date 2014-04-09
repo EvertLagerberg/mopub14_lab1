@@ -37,34 +37,6 @@
 
     <link rel="stylesheet" href="imageview.css">
 
-    <script>
-    // Function to make it easier to define swipe events.
-    function swipeBetween(pages, i, j)
-    {
-        var left = '#' + pages[i].id;
-        var right = '#' + pages[j].id;
-        $(document).on('swipeleft', left, function() {
-            $.mobile.changePage(
-                right,
-                { transition: 'slide' });
-        });
-        $(document).on('swiperight', right, function() {
-            $.mobile.changePage(
-                left,
-                { transition: 'slide', reverse: true });
-        });
-    }
-/*
-    // Set up swipe between all pages.
-    var pages = $('[data-role="page"]');
-    for (var i = 0; i < pages.length - 1; ++i)
-    {
-        swipeBetween(pages, i, i + 1);
-    }
-    swipeBetween(pages, i, 0);
-*/
-    </script>
-
 
 </head>
 <body>
@@ -74,7 +46,7 @@
         </div>
         <div data-role="content">
             <ul data-role="listview" data-inset="true">
-<<<<<<< HEAD
+
                 <li><a href="#Wolf">
                 <img src="http://www.findyourtattoo.net/wp-content/uploads/2013/05/Wolf-Tribal-Tattoo.jpg">
                 Wolf
@@ -90,13 +62,7 @@
                 </a></li>
                 <li><a href="#Nerdy"><img src="http://blog.mugnai.netdna-cdn.com/wp-content/uploads/2013/01/ghost.jpg">
                 Nerdy</a></li>
-=======
-                <li><a href="#Wolf" $("#wolf_image")>Wolf</a></li>
-                <li><a href="#Tribal">Tribals</a></li>
-                <li><a href="#Cross">Cross</a></li>
-                <li><a href="#Cars">Cars</a></li>
-                <li><a href="#Nerdy">Nerdy</a></li>
->>>>>>> 6dab7f0ddfd67115c0d422295d11856569d76eb3
+
             </ul>
             <a href="#About" data-role="button">About</a>
         </div>
@@ -194,13 +160,10 @@
 
 <div data-role"page" id="Evert">
         <div data-role="header" data-position="fixed">
-<<<<<<< HEAD
+
             <h1>Evert</h1>
-            <a href="#page-contents"
-=======
-            <h1>About</h1>
             <a href="#About"
->>>>>>> 6dab7f0ddfd67115c0d422295d11856569d76eb3
+
                 data-role="button"
                 class="ui-btn-left"
                 data-icon="arrow-l">Back</a>
@@ -215,11 +178,8 @@
 
 <div data-role"page" id="Tommy">
         <div data-role="header" data-position="fixed">
-<<<<<<< HEAD
             <h1>Tommy</h1>
-=======
-            <h1>About</h1>
->>>>>>> 6dab7f0ddfd67115c0d422295d11856569d76eb3
+
             <a href="#About"
                 data-role="button"
                 class="ui-btn-left"
