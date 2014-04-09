@@ -9,8 +9,8 @@
 	
 	 <script>
     // Set default transitions.
-    $.mobile.defaultPageTransition = "none";
-    $.mobile.defaultDialogTransition = "none";
+    $.mobile.defaultPageTransition = "slide";
+    $.mobile.defaultDialogTransition = "pop";
 
     // Function to make it easier to define swipe events.
     function swipeBetween(left, right)
@@ -37,16 +37,17 @@
 
     <link rel="stylesheet" href="imageview.css">
 
-    <script>    
-    $.mobile.defaultPageTransition = 'slide';    
-    </script>
-
-
 </head>
 <body>
 <div data-role="page" id="page-contents">
         <div data-role="header" data-position="fixed">
             <h1>Tattoo Gallery</h1>
+            <a href="#Setting"
+            	data-role="button"
+                class="ui-btn-right"
+                data-rel="dialog"
+                data-theme="e"
+                data-icon="gear">Select theme</a>
         </div>
         <div data-role="content" data-theme="a">
             <ul data-role="listview" data-inset="true">
@@ -142,7 +143,7 @@
         </div>
     </div>
 
-<div data-role"page" id="About">
+<div data-role="page" id="About">
         <div data-role="header" data-position="fixed">
             <h1>About</h1>
             <a href="#page-contents"
@@ -168,7 +169,7 @@
         </div>
 </div>
 
-<div data-role"page" id="Evert">
+<div data-role="page" id="Evert">
         <div data-role="header" data-position="fixed">
 
             <h1>Evert</h1>
@@ -187,7 +188,7 @@
         </div>
 </div>
 
-<div data-role"page" id="Tommy">
+<div data-role="page" id="Tommy">
         <div data-role="header" data-position="fixed">
             <h1>Tommy</h1>
 
@@ -200,6 +201,15 @@
         <div data-role="content">
        
         <p>I live in Norrtälje with my girl, my son and my daughter</p>
+        </div>
+</div>
+
+<div data-role="dialog" id="Setting">
+        <div data-role="header" data-position="fixed">
+            <h1>Select theme</h1>
+        </div>
+        <div data-role="content">
+        <p>HEJ</p>
         </div>
 </div>
 
