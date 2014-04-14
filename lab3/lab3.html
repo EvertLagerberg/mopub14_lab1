@@ -51,11 +51,12 @@
       buttonSend.on('click', function() {
       	 if(navigator.geolocation) {
 		  	 navigator.geolocation.getCurrentPosition(function(position) {
+			  	 console.log("1");
 			  	 var lat = position.coords.latitude;
 			  	 var lon = position.coords.longitude;
 			  	 nav = lat + " " + lon;
-      	console.log( 'plats ' + nav);
-      	})}
+			  	 console.log(nav);
+      	console.log( 'plats= ' + nav);
       	
         pubnub.publish({
           'channel' : 'tasty-chat',
@@ -74,10 +75,7 @@
           }
         });
       });
-
     });
-    
-  
        
      
            // $(function() {
