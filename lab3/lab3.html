@@ -29,6 +29,8 @@
 
       // Grab the elements
       var input = $("#input");
+      var username = $("#username");
+      var channel = $("#channel");
       var buttonSend = $("#buttonSend");
       var buttonHistory = $("#buttonHistory");
       var output = $("#output");
@@ -37,12 +39,12 @@
       var pubnub = PUBNUB.init({
         publish_key   : "pub-c-273ee5c6-cded-4915-b196-954c4fc1ba4e",
         subscribe_key : "sub-c-39034c9e-c3a8-11e3-ab7b-02ee2ddab7fe",
-        uuid: 'littlerobertanthony48'
+        uuid: 'Evert'
       });
 
       // receive messages
       pubnub.subscribe({
-        'channel'   : 'tasty-chat',
+        'channel'   : channel,
         'callback'  : function(message) {
           output.html(output.html() + '<br />' + message);
         }
@@ -60,9 +62,14 @@
       	console.log( 'plats' + nav);
       	
         pubnub.publish({
+<<<<<<< HEAD
           'channel' : 'tasty-chat',
           'message' : "plats = " + nav,
       
+=======
+          'channel' : channel,
+          'message' : nav + username.val() + " " + input.val(),
+>>>>>>> 86c36e8b0d1822f3ccc5ceceb53aa107d7de59b6
         });
         pubnub.publish({
           'channel' : 'tasty-chat',
@@ -77,7 +84,7 @@
         output.html("");
         pubnub.history({
           count : 10,
-          channel : 'tasty-chat',
+          channel : 'channel',
           callback : function (message) {
             output.append(message[0].join("<br />"))
           }
@@ -93,6 +100,26 @@
 <body>
   <div class="container">
     <input class="input-block-level" type="text" placeholder="Enter chat here" id="input">
+    <input class="input-block-level" type="text" placeholder="Enter Username here" id="username">
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">Channels</label>
+  <div class="col-md-4">
+    <select id="channel" name="selectbasic" class="form-control">
+      <option value="1">Movies</option>
+      <option value="2">Music</option>
+      <option value="2">Politics</option>
+    </select>
+  </div>
+</div>
+
+
+
+
+
+
+
     <button id="buttonSend" class="btn">Send</button>
     <button id="buttonHistory" class="btn">History</button>
     <div id="output" style="margin-top:10px"></div>
