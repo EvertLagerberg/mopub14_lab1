@@ -44,11 +44,23 @@
 
       // receive messages
       pubnub.subscribe({
-        'channel'   : channel,
+        'channel'   : channel.val(),
         'callback'  : function(message) {
+        	console.log('Channel = ' + channel.val() )
           output.html(output.html() + '<br />' + message);
         }
       });
+      
+      channel.on('change', function(){
+      	 pubnub.subscribe({
+	      'channel'   : channel.val(),
+		  'callback'  : function(message) {
+          console.log('Channel = ' + channel.val() )
+          output.html(output.html() + '<br />' + message);
+        }
+      })});
+      
+      
 
       // send messages
       buttonSend.on('click', function() {
@@ -58,37 +70,21 @@
 			  	 var lat = position.coords.latitude;
 			  	 var lon = position.coords.longitude;
 			  	 nav = lat + " " + lon;
-			  	 console.log(nav);
+			  	 console.log(channel.val());
       	console.log( 'plats' + nav);
       	
         pubnub.publish({
-<<<<<<< HEAD
-          'channel' : 'tasty-chat',
-          'message' : "plats = " + nav,
+
+          'channel' : channel.val(),
+          'message' : username.val() + " plats = " + nav,
       
-=======
-          'channel' : channel,
-          'message' : nav + username.val() + " " + input.val(),
->>>>>>> 86c36e8b0d1822f3ccc5ceceb53aa107d7de59b6
         });
         pubnub.publish({
-          'channel' : 'tasty-chat',
+          'channel' : channel.val(),
           'message' : input.val(),
       
         });
         
-      });
-
-      // check history
-      buttonHistory.on('click', function() {
-        output.html("");
-        pubnub.history({
-          count : 10,
-          channel : 'channel',
-          callback : function (message) {
-            output.append(message[0].join("<br />"))
-          }
-        });
       });
     }})});
        
@@ -107,9 +103,9 @@
   <label class="col-md-4 control-label" for="selectbasic">Channels</label>
   <div class="col-md-4">
     <select id="channel" name="selectbasic" class="form-control">
-      <option value="1">Movies</option>
-      <option value="2">Music</option>
-      <option value="2">Politics</option>
+      <option value="Movies">Movies</option>
+      <option value="Music">Music</option>
+      <option value="Politics">Politics</option>
     </select>
   </div>
 </div>
