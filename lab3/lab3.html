@@ -30,6 +30,7 @@
       // Grab the elements
       var input = $("#input");
       var username = $("#username");
+      var channel = $("#channel");
       var buttonSend = $("#buttonSend");
       var buttonHistory = $("#buttonHistory");
       var output = $("#output");
@@ -43,7 +44,7 @@
 
       // receive messages
       pubnub.subscribe({
-        'channel'   : 'tasty-chat',
+        'channel'   : channel,
         'callback'  : function(message) {
           output.html(output.html() + '<br />' + message);
         }
@@ -60,7 +61,7 @@
       	})}
       	
         pubnub.publish({
-          'channel' : 'tasty-chat',
+          'channel' : channel,
           'message' : nav + username.val() + " " + input.val(),
         });
       });
@@ -70,7 +71,7 @@
         output.html("");
         pubnub.history({
           count : 10,
-          channel : 'tasty-chat',
+          channel : 'channel',
           callback : function (message) {
             output.append(message[0].join("<br />"))
           }
