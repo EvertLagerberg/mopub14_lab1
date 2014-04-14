@@ -44,7 +44,7 @@
 
       // receive messages
       pubnub.subscribe({
-        'channel'   : channel,
+        'channel'   : channel.val(),
         'callback'  : function(message) {
           output.html(output.html() + '<br />' + message);
         }
@@ -57,12 +57,12 @@
 			  	 var lat = position.coords.latitude;
 			  	 var lon = position.coords.longitude;
 			  	 nav = lat + " " + lon;
-      	console.log( 'plats ' + nav);
+      	console.log( 'plats ' + nav + channel.val());
       	})}
       	
         pubnub.publish({
-          'channel' : channel,
-          'message' : nav + username.val() + " " + input.val(),
+          'channel' : channel.val(),
+          'message' : nav + "" + username.val() + ":" + " " + input.val(),
         });
       });
 
@@ -71,7 +71,7 @@
         output.html("");
         pubnub.history({
           count : 10,
-          channel : 'channel',
+          channel : channel.val(),
           callback : function (message) {
             output.append(message[0].join("<br />"))
           }
@@ -81,6 +81,14 @@
     });
     
   
+  channel.on('change', function() {
+    pubnub.subscribe({
+        'channel'   : channel.val(),
+        'callback'  : function(message) {
+          output.html(output.html() + '<br />' + message)
+        }
+      }
+  )}
        
      
            // $(function() {
@@ -97,9 +105,9 @@
   <label class="col-md-4 control-label" for="selectbasic">Channels</label>
   <div class="col-md-4">
     <select id="channel" name="selectbasic" class="form-control">
-      <option value="1">Movies</option>
-      <option value="2">Music</option>
-      <option value="2">Politics</option>
+      <option value="movies">Movies</option>
+      <option value="music">Music</option>
+      <option value="politics">Politics</option>
     </select>
   </div>
 </div>
