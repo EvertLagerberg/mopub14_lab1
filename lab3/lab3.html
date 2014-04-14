@@ -22,6 +22,9 @@
   <!-- Pubnub credentials -->
   <script src='cred.js'></script>
 
+    <!-- Load Map -->
+  <script src="https://maps.googleapis.com/maps/api/js?AIzaSyBXpGBUg6st-2CP2-t-CwV-qRiMU2i7Z9g&sensor=true"></script>
+
   <script>
 
     // When the DOM is ready...
@@ -56,7 +59,7 @@
 	      'channel'   : channel.val(),
 		  'callback'  : function(message) {
           console.log('Channel = ' + channel.val() )
-          output.html(output.html() + '<br />' + message);
+          output.html(output.html() + '<br />' + "<h1>" + channel.val() +"</h1>" + message);
         }
       })});
       
@@ -70,6 +73,24 @@
 			  	 var lat = position.coords.latitude;
 			  	 var lon = position.coords.longitude;
 			  	 nav = lat + " " + lon;
+
+
+    var geocoder = new google.maps.Geocoder();
+
+    var latlng = new google.maps.LatLng(lat, lon);
+    geocoder.geocode({'latLng': latlng}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        if (results[1]) {   
+          console.log(results[1].formatted_address);
+        }
+      } else {
+        alert("Geocoder failed due to: " + status);
+      }
+    });
+
+
+
+
 			  	 console.log(channel.val());
       	console.log( 'plats' + nav);
       	
@@ -85,7 +106,17 @@
     }})});
        
      
-           // $(function() {
+  
+
+
+
+  
+
+  
+
+
+
+
   </script>
 </head>
 
