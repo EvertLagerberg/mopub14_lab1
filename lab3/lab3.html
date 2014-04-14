@@ -66,27 +66,18 @@
       buttonSend.on('click', function() {
       	 if(navigator.geolocation) {
 		  	 navigator.geolocation.getCurrentPosition(function(position) {
+			  	 console.log("1");
 			  	 var lat = position.coords.latitude;
 			  	 var lon = position.coords.longitude;
 			  	 nav = lat + " " + lon;
-      	console.log( 'plats ' + nav + channel.val());
-      	})}
+			  	 console.log(channel.val());
+      	console.log( 'plats' + nav);
       	
         pubnub.publish({
-          'channel' : channel.val(),
-          'message' : nav + "" + username.val() + ":" + " " + input.val(),
-        });
-      });
 
-      // check history
-      buttonHistory.on('click', function() {
-        output.html("");
-        pubnub.history({
-          count : 10,
-          channel : channel.val(),
-          callback : function (message) {
-            output.append(message[0].join("<br />"))
-          }
+          'channel' : channel.val(),
+          'message' : username.val() + " plats = " + nav,
+      
         });
         pubnub.publish({
           'channel' : channel.val(),
@@ -112,9 +103,9 @@
   <label class="col-md-4 control-label" for="selectbasic">Channels</label>
   <div class="col-md-4">
     <select id="channel" name="selectbasic" class="form-control">
-      <option value="movies">Movies</option>
-      <option value="music">Music</option>
-      <option value="politics">Politics</option>
+      <option value="Movies">Movies</option>
+      <option value="Music">Music</option>
+      <option value="Politics">Politics</option>
     </select>
   </div>
 </div>
