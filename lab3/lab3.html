@@ -22,7 +22,7 @@
   <!-- Pubnub credentials -->
   <script src='cred.js'></script>
 
-    <!-- Load Map -->
+  <!-- Load Map -->
   <script src="https://maps.googleapis.com/maps/api/js?AIzaSyBXpGBUg6st-2CP2-t-CwV-qRiMU2i7Z9g&sensor=true"></script>
 
   <script>
@@ -55,9 +55,9 @@
       });
       
       channel.on('change', function(){
-      	 pubnub.subscribe({
-	      'channel'   : channel.val(),
-		  'callback'  : function(message) {
+        pubnub.subscribe({
+         'channel'   : channel.val(),
+         'callback'  : function(message) {
           console.log('Channel = ' + channel.val() )
           output.html(output.html() + '<br />' + "<h1>" + channel.val() +"</h1>" + message);
         }
@@ -67,75 +67,44 @@
 
       // send messages
       buttonSend.on('click', function() {
-      	 if(navigator.geolocation) {
-		  	 navigator.geolocation.getCurrentPosition(function(position) {
-			  	 console.log("1");
-			  	 var lat = position.coords.latitude;
-			  	 var lon = position.coords.longitude;
-			  	 nav = lat + " " + lon;
+        if(navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+           console.log("1");
+           var lat = position.coords.latitude;
+           var lon = position.coords.longitude;
+                       
 
 
-    var geocoder = new google.maps.Geocoder();
+           var geocoder = new google.maps.Geocoder();
 
-    var latlng = new google.maps.LatLng(lat, lon);
-    geocoder.geocode({'latLng': latlng}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        if (results[1]) {   
-          console.log(results[1].formatted_address);
-        }
-      } else {
-        alert("Geocoder failed due to: " + status);
-      }
-    });
-
-
-
-
-			  	 console.log(channel.val());
-      	console.log( 'plats' + nav);
-      	
-        pubnub.publish({
-
-          'channel' : channel.val(),
-          'message' : username.val() + ":" + " plats = " + nav + "<br />" + input.val()
-      
-        });
-
-        
-      });
-    }})});
-       
-     
-  
-
-
-
-  
-
-  
+           var latlng = new google.maps.LatLng(lat, lon);
+           geocoder.geocode({'latLng': latlng}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+              if (results[6]) {   
+                console.log(results[6].formatted_address);
+                nav = results[6].formatted_address;
+              }
+            } else {
+              alert("Geocoder failed due to: " + status);
+            }
+          });
 
 
 
 
-  </script>
-</head>
+           console.log(channel.val());
+           console.log( 'plats' + nav);
 
-<body>
-  <div class="container">
-    <input class="input-block-level" type="text" placeholder="Enter chat here" id="input">
-    <input class="input-block-level" type="text" placeholder="Enter Username here" id="username">
+           pubnub.publish({
 
-<!-- Select Basic -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="selectbasic">Channels</label>
-  <div class="col-md-4">
-    <select id="channel" name="selectbasic" class="form-control">
-      <option value="Movies">Movies</option>
-      <option value="Music">Music</option>
-      <option value="Politics">Politics</option>
-    </select>
-  </div>
-</div>
+            'channel' : channel.val(),
+            'message' : username.val() + ":" + " plats = " + nav + "<br />" + input.val()
+
+          });
+
+
+         });
+        }})});
 
 
 
@@ -143,9 +112,41 @@
 
 
 
-    <button id="buttonSend" class="btn">Send</button>
-    <button id="buttonHistory" class="btn">History</button>
-    <div id="output" style="margin-top:10px"></div>
-  </div>
-</body>
-</html>
+
+
+
+
+
+
+      </script>
+    </head>
+
+    <body>
+      <div class="container">
+        <input class="input-block-level" type="text" placeholder="Enter chat here" id="input">
+        <input class="input-block-level" type="text" placeholder="Enter Username here" id="username">
+
+        <!-- Select Basic -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="selectbasic">Channels</label>
+          <div class="col-md-4">
+            <select id="channel" name="selectbasic" class="form-control">
+              <option value="Movies">Movies</option>
+              <option value="Music">Music</option>
+              <option value="Politics">Politics</option>
+            </select>
+          </div>
+        </div>
+
+
+
+
+
+
+
+        <button id="buttonSend" class="btn">Send</button>
+        <button id="buttonHistory" class="btn">History</button>
+        <div id="output" style="margin-top:10px"></div>
+      </div>
+    </body>
+    </html>
