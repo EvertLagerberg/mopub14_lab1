@@ -76,14 +76,10 @@
         pubnub.publish({
 
           'channel' : channel.val(),
-          'message' : username.val() + " plats = " + nav,
+          'message' : username.val() + ":" + " plats = " + nav + "<br />" + input.val()
       
         });
-        pubnub.publish({
-          'channel' : channel.val(),
-          'message' : input.val(),
-      
-        });
+
         
       });
     }})});
