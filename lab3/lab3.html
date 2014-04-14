@@ -21,6 +21,9 @@
 
   <!-- Pubnub credentials -->
   <script src='cred.js'></script>
+  
+  <!--Google API-------->
+  <script src="https://maps.googleapis.com/maps/api/js?AIzaSyBXpGBUg6st-2CP2-t-CwV-qRiMU2i7Z9g&sensor=true"></script>
 
   <script>
 
@@ -57,11 +60,19 @@
 		  'callback'  : function(message) {
           console.log('Channel = ' + channel.val() )
           output.html(output.html() + '<br />' + message);
+          
         }
       })});
       
-      
+       channel.on('change', function(){
+       pubnub.publish({
 
+          'channel' : channel.val(),
+          'message' : "Du chattar nu i " + channel.val() ,
+        });
+      	 
+      	 });
+     
       // send messages
       buttonSend.on('click', function() {
       	 if(navigator.geolocation) {
@@ -69,6 +80,7 @@
 			  	 console.log("1");
 			  	 var lat = position.coords.latitude;
 			  	 var lon = position.coords.longitude;
+			  	 var latlng = new google.maps.LatLng(lat, lng);
 			  	 nav = lat + " " + lon;
 			  	 console.log(channel.val());
       	console.log( 'plats' + nav);
@@ -83,6 +95,8 @@
         
       });
     }})});
+    
+    
        
      
            // $(function() {
