@@ -29,6 +29,7 @@
 
       // Grab the elements
       var input = $("#input");
+      var username = $("#username");
       var buttonSend = $("#buttonSend");
       var buttonHistory = $("#buttonHistory");
       var output = $("#output");
@@ -37,7 +38,7 @@
       var pubnub = PUBNUB.init({
         publish_key   : "pub-c-273ee5c6-cded-4915-b196-954c4fc1ba4e",
         subscribe_key : "sub-c-39034c9e-c3a8-11e3-ab7b-02ee2ddab7fe",
-        uuid: 'littlerobertanthony48'
+        uuid: 'Evert'
       });
 
       // receive messages
@@ -60,8 +61,7 @@
       	
         pubnub.publish({
           'channel' : 'tasty-chat',
-          'message' : nav + " " + input.val(),
-          
+          'message' : nav + username.val() + " " + input.val(),
         });
       });
 
@@ -89,6 +89,26 @@
 <body>
   <div class="container">
     <input class="input-block-level" type="text" placeholder="Enter chat here" id="input">
+    <input class="input-block-level" type="text" placeholder="Enter Username here" id="username">
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="selectbasic">Channels</label>
+  <div class="col-md-4">
+    <select id="channel" name="selectbasic" class="form-control">
+      <option value="1">Movies</option>
+      <option value="2">Music</option>
+      <option value="2">Politics</option>
+    </select>
+  </div>
+</div>
+
+
+
+
+
+
+
     <button id="buttonSend" class="btn">Send</button>
     <button id="buttonHistory" class="btn">History</button>
     <div id="output" style="margin-top:10px"></div>
