@@ -27,24 +27,6 @@
     // When the DOM is ready...
     $(function() {
 
-
-        if(navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-        var latitude = position.coords.latitude;
-        var longitude = postition.coords.longitude;
-        console.log(position.coords.latitude,position.coords.longitude);
-        }
-        );
-      }
-
-  
-        
-
-        
-        
-     
-      
-
       // Grab the elements
       var input = $("#input");
       var buttonSend = $("#buttonSend");
@@ -67,9 +49,17 @@
 
       // send messages
       buttonSend.on('click', function() {
+      	 if(navigator.geolocation) {
+		  	 navigator.geolocation.getCurrentPosition(function(position) {
+			  	 var lat = position.coords.latitude;
+			  	 var lon = position.coords.longitude;
+			  	 nav = lat + " " + lon;
+      	console.log( 'plats ' + nav);
+      	})}
+      	
         pubnub.publish({
           'channel' : 'tasty-chat',
-          'message' : latitude + input.val()
+          'message' : nav + " " + input.val()
         });
       });
 
@@ -85,7 +75,12 @@
         });
       });
 
-    }); // $(function() {
+    });
+    
+  
+       
+     
+           // $(function() {
   </script>
 </head>
 
