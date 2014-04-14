@@ -57,13 +57,19 @@
 			  	 var lon = position.coords.longitude;
 			  	 nav = lat + " " + lon;
 			  	 console.log(nav);
-      	console.log( 'plats= ' + nav);
+      	console.log( 'plats' + nav);
       	
         pubnub.publish({
           'channel' : 'tasty-chat',
-          'message' : nav + " " + input.val(),
-          
+          'message' : "plats = " + nav,
+      
         });
+        pubnub.publish({
+          'channel' : 'tasty-chat',
+          'message' : input.val(),
+      
+        });
+        
       });
 
       // check history
@@ -77,7 +83,7 @@
           }
         });
       });
-    });
+    }})});
        
      
            // $(function() {
