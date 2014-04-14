@@ -27,6 +27,24 @@
     // When the DOM is ready...
     $(function() {
 
+
+        if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+        var latitude = position.coords.latitude;
+        var longitude = postition.coords.longitude;
+        console.log(position.coords.latitude,position.coords.longitude);
+        }
+        );
+      }
+
+  
+        
+
+        
+        
+     
+      
+
       // Grab the elements
       var input = $("#input");
       var buttonSend = $("#buttonSend");
@@ -51,7 +69,7 @@
       buttonSend.on('click', function() {
         pubnub.publish({
           'channel' : 'tasty-chat',
-          'message' : input.val()
+          'message' : latitude + input.val()
         });
       });
 
