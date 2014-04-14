@@ -46,9 +46,21 @@
       pubnub.subscribe({
         'channel'   : channel.val(),
         'callback'  : function(message) {
+        	console.log('Channel = ' + channel.val() )
           output.html(output.html() + '<br />' + message);
         }
       });
+      
+      channel.on('change', function(){
+      	 pubnub.subscribe({
+	      'channel'   : channel.val(),
+		  'callback'  : function(message) {
+          console.log('Channel = ' + channel.val() )
+          output.html(output.html() + '<br />' + message);
+        }
+      })});
+      
+      
 
       // send messages
       buttonSend.on('click', function() {
@@ -76,19 +88,14 @@
             output.append(message[0].join("<br />"))
           }
         });
+        pubnub.publish({
+          'channel' : channel.val(),
+          'message' : input.val(),
+      
+        });
+        
       });
-
-    });
-    
-  
-  channel.on('change', function() {
-    pubnub.subscribe({
-        'channel'   : channel.val(),
-        'callback'  : function(message) {
-          output.html(output.html() + '<br />' + message)
-        }
-      }
-  )}
+    }})});
        
      
            // $(function() {
