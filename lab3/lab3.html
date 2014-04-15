@@ -21,8 +21,8 @@
 
   <!-- Pubnub credentials -->
   <script src='cred.js'></script>
-  
-  <!--Google API-------->
+
+    <!-- Load Map -->
   <script src="https://maps.googleapis.com/maps/api/js?AIzaSyBXpGBUg6st-2CP2-t-CwV-qRiMU2i7Z9g&sensor=true"></script>
 
   <script>
@@ -59,20 +59,12 @@
 	      'channel'   : channel.val(),
 		  'callback'  : function(message) {
           console.log('Channel = ' + channel.val() )
-          output.html(output.html() + '<br />' + message);
-          
+          output.html(output.html() + '<br />' + "<h1>" + channel.val() +"</h1>" + message);
         }
       })});
       
-       channel.on('change', function(){
-       pubnub.publish({
+      
 
-          'channel' : channel.val(),
-          'message' : "Du chattar nu i " + channel.val() ,
-        });
-      	 
-      	 });
-     
       // send messages
       buttonSend.on('click', function() {
       	 if(navigator.geolocation) {
@@ -80,26 +72,52 @@
 			  	 console.log("1");
 			  	 var lat = position.coords.latitude;
 			  	 var lon = position.coords.longitude;
-			  	 var latlng = new google.maps.LatLng(lat, lng);
-			  	 nav = lat + " " + lon;
+			  	 
+
+
+    var geocoder = new google.maps.Geocoder();
+
+    var latlng = new google.maps.LatLng(lat, lon);
+    geocoder.geocode({'latLng': latlng}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        if (results[6]) {   
+          console.log(results[6].formatted_address);
+          nav = results[6].formatted_address;
+        }
+      } else {
+        alert("Geocoder failed due to: " + status);
+      }
+    });
+
+
+
+
 			  	 console.log(channel.val());
       	console.log( 'plats' + nav);
       	
         pubnub.publish({
 
           'channel' : channel.val(),
-          'message' : username.val() + ":" + " plats = " + nav + "<br />" + input.val()
+          'message' : username.val() + " (" + nav + ")" + "<br />" + input.val()
       
         });
 
         
       });
     }})});
-    
-    
        
      
-           // $(function() {
+  
+
+
+
+  
+
+  
+
+
+
+
   </script>
 </head>
 
