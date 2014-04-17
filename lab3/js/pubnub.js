@@ -6,6 +6,8 @@
     // When the DOM is ready...
     $(function() {
 
+
+
       // Grab the elements
       var input = $("#input");
       var username = $("#username");
@@ -21,6 +23,14 @@
         uuid: 'Evert'
       });
 
+      pubnub.subscribe({
+       'channel'   : channel,
+       'callback'  : function(message) {
+        console.log('Subscribe = ' + channel )
+        output.html(output.html());
+      }
+    });
+
 
 
       
@@ -30,30 +40,110 @@
 
       // send messages
       buttonSend.on('click', function() {
-        if(navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-           console.log("Hej");
-           var lat = position.coords.latitude;
-           var lon = position.coords.longitude;
-           
+
+        $('.progress-bar').animate({ width: "50%" },1000);
+    
 
 
-           var geocoder = new google.maps.Geocoder();
+        geolocation(function(channel) {
+
+          console.log("got geo " + channel);
+
+          publish(channel, username, input, output, pubnub, function (channel, username, input, output, pubnub){
+
+            console.log("subscribe");
+            $('.progress-bar').animate({ width: "100%" },1);
+
+
+            pubnub.subscribe({
+             'channel'   : channel,
+             'callback'  : function(message) {
+              console.log('Subscribe = ' + channel )
+              output.html(output.html() + '<br />' + "Channel: " + channel + message);
+            }
+          });
+
+
+
+
+
+
+
+
+
+
+          });
+
+
+          
+
+
+
+
+        });
+
+
+      })
+
+
+
+    });
+
+
+
+
+
+
+function publish(channel, username, input, output, pubnub, callback) {
+
+  console.log("publish");
+
+
+  pubnub.publish({
+
+    'channel' : channel,
+    'message' : "<br /><b>" + username.val() + " says:</b><br />" + input.val() + "<br />"
+
+
+  });
+
+
+  console.log("Here");
+  callback(channel, username, input, output, pubnub);
+}
+
+
+
+
+
+function geolocation(callback) {
+  console.log("geofunction");
+
+
+  navigator.geolocation.getCurrentPosition(function(position) {
+
+   var lat = position.coords.latitude;
+   var lon = position.coords.longitude;
+   console.log(lat);
+
+
+
+           /*var geocoder = new google.maps.Geocoder();
 
            var latlng = new google.maps.LatLng(lat, lon);
            geocoder.geocode({'latLng': latlng}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
               if (results[6]) {   
-                console.log(results[6].formatted_address);
+                console.log("GeoFound");
                 console.log(lat, lon);
                 //nav = results[6].formatted_address;
               }
             } else {
               alert("Geocoder failed due to: " + status);
             }
-          });
-           console.log("What");
-           if(
+          });*/
+
+  if(
             //latitude max
             lat <= 59.346979 && 
             //latitude min
@@ -64,64 +154,23 @@
             lon >= 18.073450
 
             ) 
-           {
-            console.log("Hej");
-            publish("torget", username, input, output, pubnub);
-            subscribe("torget", username, input, output, pubnub);
-          } else {
-            subscribe("Other", username, input, output, pubnub);
-            publish("Other", username, input, output, pubnub);
-            
-          }
+  {
+    console.log("If");
+    channel = "Torget";
+  } else {
+    channel = "Other"
+  }
+
+  callback(channel);
 
 
 
 
-        });
-}})
+})
 
-
-
-});
-
-
-function publish(channel, username, input, output, pubnub) {
-
-      console.log("publish");
-
-
-
-
-
-      pubnub.publish({
-
-        'channel' : channel,
-        'message' : "<br /><b>" + username.val() + " says:</b><br />" + input.val() + "<br />"
-        
-
-      });
-
-
-
-
-
-
-    }
-
-
-
-function subscribe(channel, username, input, output, pubnub) {
-
-        console.log("subscribe");
-
-        pubnub.subscribe({
-       'channel'   : channel,
-       'callback'  : function(message) {
-        console.log('Subscribe = ' + channel )
-        output.html(output.html() + '<br />' + "Channel: " + channel + message);
-      }
-    });
 }
+
+
 
 
 
