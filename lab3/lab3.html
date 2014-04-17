@@ -67,38 +67,19 @@
 
       // send messages
       buttonSend.on('click', function() {
-<<<<<<< HEAD
-      	 if(navigator.geolocation) {
-		  	 navigator.geolocation.getCurrentPosition(function(position) {
-			  	 console.log("1");
-			  	 var lat = position.coords.latitude;
-			  	 var lon = position.coords.longitude;
-			  	 
-=======
+
         if(navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
            console.log("1");
            var lat = position.coords.latitude;
            var lon = position.coords.longitude;
                        
->>>>>>> a4b6c0b6fa3e1398ca461e886ee5347143421ae2
+
 
 
            var geocoder = new google.maps.Geocoder();
 
-<<<<<<< HEAD
-    var latlng = new google.maps.LatLng(lat, lon);
-    geocoder.geocode({'latLng': latlng}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        if (results[6]) {   
-          console.log(results[6].formatted_address);
-          nav = results[6].formatted_address;
-        }
-      } else {
-        alert("Geocoder failed due to: " + status);
-      }
-    });
-=======
+
            var latlng = new google.maps.LatLng(lat, lon);
            geocoder.geocode({'latLng': latlng}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
@@ -110,7 +91,6 @@
               alert("Geocoder failed due to: " + status);
             }
           });
->>>>>>> a4b6c0b6fa3e1398ca461e886ee5347143421ae2
 
 
 
@@ -132,13 +112,8 @@
 
 
 
-<<<<<<< HEAD
-          'channel' : channel.val(),
-          'message' : username.val() + " (" + nav + ")" + "<br />" + input.val()
-      
-        });
-=======
->>>>>>> a4b6c0b6fa3e1398ca461e886ee5347143421ae2
+
+
 
 
 
