@@ -42,100 +42,7 @@
       <!-- Load Map -->
       <script src="https://maps.googleapis.com/maps/api/js?AIzaSyBXpGBUg6st-2CP2-t-CwV-qRiMU2i7Z9g&sensor=true"></script>
 
-      <script>
-
-    // When the DOM is ready...
-    $(function() {
-
-      // Grab the elements
-      var input = $("#input");
-      var username = $("#username");
-      var channel = $("#channel");
-      var buttonSend = $("#buttonSend");
-      var buttonHistory = $("#buttonHistory");
-      var output = $("#output");
-
-      // Init PubNub
-      var pubnub = PUBNUB.init({
-        publish_key   : "pub-c-273ee5c6-cded-4915-b196-954c4fc1ba4e",
-        subscribe_key : "sub-c-39034c9e-c3a8-11e3-ab7b-02ee2ddab7fe",
-        uuid: 'Evert'
-      });
-
-      // receive messages
-      pubnub.subscribe({
-        'channel'   : channel.val(),
-        'callback'  : function(message) {
-          console.log('Channel = ' + channel.val() )
-          output.html(output.html() + '<br />' + message);
-        }
-      });
-      
-      channel.on('change', function(){
-        pubnub.subscribe({
-         'channel'   : channel.val(),
-         'callback'  : function(message) {
-          console.log('Channel = ' + channel.val() )
-          output.html(output.html() + '<br />' + "<h1>" + channel.val() +"</h1>" + message);
-        }
-      })});
-      
-      
-
-      // send messages
-      buttonSend.on('click', function() {
-        if(navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-           console.log("1");
-           var lat = position.coords.latitude;
-           var lon = position.coords.longitude;
-           
-
-
-           var geocoder = new google.maps.Geocoder();
-
-           var latlng = new google.maps.LatLng(lat, lon);
-           geocoder.geocode({'latLng': latlng}, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-              if (results[6]) {   
-                console.log(results[6].formatted_address);
-                nav = results[6].formatted_address;
-              }
-            } else {
-              alert("Geocoder failed due to: " + status);
-            }
-          });
-
-
-
-
-           console.log(channel.val());
-           console.log( 'plats' + nav);
-
-           pubnub.publish({
-
-            'channel' : channel.val(),
-            'message' : "<br /><b>" + username.val() + " says:</b><br />" + input.val() + "<br />" + nav
-
-          });
-
-
-         });
-        }})});
-
-
-
-
-
-
-
-
-
-
-
-
-
-      </script>
+      <script type="text/javascript" src="js/pubnub.js" charset="utf-8"></script>
 
 
     </head>
@@ -189,13 +96,13 @@
               </div>
 
               <!-- Select Basic -->
-              <div class="table">
+              <!--<div class="table">
                 <select id="channel" name="channel" class="form-control">
                   <option value="Movies">Movies</option>
                   <option value="Music">Music</option>
                   <option value="Politics">Politics</option>
                 </select>
-              </div>
+              </div>-->
 
 
               <!-- Button -->
@@ -207,7 +114,7 @@
 
           <div class="col-md-2">
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4" id="chatbox">
             <h1>Live Chat</h1>
             <div id="output" style="margin-top:10px"></div>
           </div>
