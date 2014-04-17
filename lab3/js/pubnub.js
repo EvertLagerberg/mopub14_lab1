@@ -1,5 +1,8 @@
 
 
+
+
+
     // When the DOM is ready...
     $(function() {
 
@@ -17,6 +20,7 @@
         subscribe_key : "sub-c-39034c9e-c3a8-11e3-ab7b-02ee2ddab7fe",
         uuid: 'Evert'
       });
+
 
 
       
@@ -42,7 +46,7 @@
               if (results[6]) {   
                 console.log(results[6].formatted_address);
                 console.log(lat, lon);
-                nav = results[6].formatted_address;
+                //nav = results[6].formatted_address;
               }
             } else {
               alert("Geocoder failed due to: " + status);
@@ -62,37 +66,64 @@
             ) 
            {
             console.log("Hej");
-            channel = "torget";
+            publish("torget", username, input, output, pubnub);
+            subscribe("torget", username, input, output, pubnub);
           } else {
-            channel = "Other";
+            subscribe("Other", username, input, output, pubnub);
+            publish("Other", username, input, output, pubnub);
+            
           }
 
-          pubnub.subscribe({
-           'channel'   : channel,
-           'callback'  : function(message) {
-            console.log('Channel Change = ' + channel )
-            output.html(output.html() + '<br />' + "Channel: " + channel + message);
-          }
-        });
 
-
-
-
-
-
-          console.log(channel);
-
-
-          pubnub.publish({
-
-            'channel' : channel,
-            'message' : "<br /><b>" + username.val() + " says:</b><br />" + input.val() + "<br />" + nav
-
-          });
 
 
         });
-}})});
+}})
+
+
+
+});
+
+
+function publish(channel, username, input, output, pubnub) {
+
+      console.log("publish");
+
+
+
+
+
+      pubnub.publish({
+
+        'channel' : channel,
+        'message' : "<br /><b>" + username.val() + " says:</b><br />" + input.val() + "<br />"
+        
+
+      });
+
+
+
+
+
+
+    }
+
+
+
+function subscribe(channel, username, input, output, pubnub) {
+
+        console.log("subscribe");
+
+        pubnub.subscribe({
+       'channel'   : channel,
+       'callback'  : function(message) {
+        console.log('Subscribe = ' + channel )
+        output.html(output.html() + '<br />' + "Channel: " + channel + message);
+      }
+    });
+}
+
+
 
 
 
