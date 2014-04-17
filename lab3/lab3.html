@@ -67,6 +67,7 @@
 
       // send messages
       buttonSend.on('click', function() {
+
         if(navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
            console.log("1");
@@ -75,7 +76,9 @@
                        
 
 
+
            var geocoder = new google.maps.Geocoder();
+
 
            var latlng = new google.maps.LatLng(lat, lon);
            geocoder.geocode({'latLng': latlng}, function(results, status) {
@@ -105,6 +108,8 @@
 
          });
         }})});
+
+
 
 
 
