@@ -67,7 +67,7 @@
        if (input.val() != '' && username.val != ('')){
        	
             Communication(channel, username, input, output)
-            Communication(channel, username, input, output)
+            console.log("1") 
             Communication(channel, username, input, output)
           
           }

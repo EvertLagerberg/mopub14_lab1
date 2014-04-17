@@ -9,6 +9,7 @@ body {
 border-style:solid;
 border-width:2px;
 border-radius:25px;
-overflow: scroll;
+overflow-y: auto;
+overflow-x: hidden;
 height: 500px;
 }
