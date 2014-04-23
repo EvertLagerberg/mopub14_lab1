@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!--
+* @file index.html
+*
+* The registration page for the CloudSquare app - this creates a new user in the users collection and logs them in
+-->
+<html>
+	<head>
+		<meta name="viewport" content="width=320, user-scalable=no">
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>CloudSquare</title>
+		<link rel="stylesheet" href="style.css" type="text/css" media="screen" title="no title" charset="utf-8">
+		<script type="text/javascript" charset="utf-8" src="js/wormhole.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/CBHelper/md5.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/CBHelper/json.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/CBHelper/CBXMLHttpRequest.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/CBHelper/CBHelper.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/CBHelper/platforms/MoSyncHelper.js"></script>
+		<script type="text/javascript">
+			var helper;
+			
+			document.addEventListener(
+				"DOMContentLoaded",
+				function() {
+					// initialize a new MoSyncHelper object
+					var moSyncHelper = new MoSyncHelper();
+						    
+					// initialize a new CBHelper object with the
+					// MoSync Helper object
+					helper = new CBHelper("cloudsquare", "CB_KEY_GOES_HERE", moSyncHelper);
+					helper.setPassword(hex_md5("WRITE_CB_PASSWORD_HERE"));
+					
+					mosync.rlog("initialized");
+				},
+				true
+			);
+			
+			// Close the application when the back key is pressed.
+			document.addEventListener(
+				"backbutton",
+				function() { mosync.app.exit(); },
+				true);
+			
+			
+			function doRegister() {
+				// grab the values from the html form
+				var username = document.getElementById("username").value;
+				var password = document.getElementById("pwd").value;
+				
+				mosync.rlog("Creating user " + username + ":" + hex_md5(password));
+				
+				if ( helper ) {
+					var user = {
+						"username" : username.toLowerCase(),
+						"password" : hex_md5(password)
+					}
+					// check if we already have a user with this name - we want unique usernames
+					helper.searchDocuments({ "username" : username.toLowerCase() }, "users", function(resp) {
+						if ( resp.callStatus && resp.outputData.length == 0 ) {
+							// no users with this name found - insert new user and login
+							helper.insertDocument("users", user, null, function(resp) {
+								// The user was created correctly - login and forward to the main page
+								if ( resp.callStatus && resp.outputData == "Inserted") {
+									localStorage.CloudSquareUser = username;
+									localStorage.CloudSquarePassword = password;
+									document.location.href = 'home.html';
+								}
+							});
+						} else {
+							mosync.rlog("User already exists");
+						}
+					})
+					
+				} else {
+					mosync.rlog("helper class not initialized");
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="screen">
+			<div class="pane" id="heading">CloudSquare - Register</div>
+			<div class="pane" id="info">
+				<input type="text" name="username" id="username" placeholder="Username" />
+				<input type="password" name="pwd" id="pwd" placeholder="Password" />
+			</div>
+			<div class="pane button" onclick="doRegister();">Register</div>
+		</div>
+	</body>
+</html>

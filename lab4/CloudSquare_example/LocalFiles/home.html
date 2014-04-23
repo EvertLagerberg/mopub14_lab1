@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<!--
+* @file index.html
+*
+* The CloudSquare home page - this is where the main map is displayed
+-->
+<html>
+	<head>
+		<meta name="viewport" content="width=320, user-scalable=no">
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>CloudSquare</title>
+		<link rel="stylesheet" href="style.css" type="text/css" media="screen" title="no title" charset="utf-8">
+		<script type="text/javascript" charset="utf-8" src="js/wormhole.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/CBHelper/md5.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/CBHelper/json.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/CBHelper/CBXMLHttpRequest.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/CBHelper/CBHelper.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/CBHelper/platforms/MoSyncHelper.js"></script>
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=YOUR-GOOGLE_MAP_KEY_GOES_HERE&sensor=false"></script>
+		<script type="text/javascript">
+			var helper; // the CBHelper object
+			var map; // The Google maps object
+			var currentPosition; // The shared current position object
+			var pushToken; // A push notification token for the device
+			
+			document.addEventListener(
+				"DOMContentLoaded",
+				function() {
+					if ( !helper ) {
+						// initialize a new MoSyncHelper object
+						var moSyncHelper = new MoSyncHelper();
+						    
+						// initialize a new CBHelper object with the
+						// MoSync Helper object
+						helper = new CBHelper("cloudsquare", 
+							"CB_KEY_GOES_HERE", moSyncHelper);
+						helper.setPassword(hex_md5("WRITE_CB_PASSWORD_HERE"));
+						
+						// check if we have access to the local storage and a user is already setup
+						if ( localStorage && localStorage.CloudSquareUser ) {
+							// the application is not setup to require user authentication
+							// so setting these parameters is reduntant - however setting them
+							// will cause the data API to keep an audit trail in the database, which is good
+							// since it's an open application
+							helper.authUsername = localStorage.CloudSquareUser;
+							helper.authPassword = localStorage.CloudSquarePassword;
+							
+						}
+					}
+					
+					// start picking up the current location every 3 minutes
+					window.setTimeout(updateLocation(), 60*3*1000);
+					
+					// initialize the map
+					var mapOptions = {
+						center: new google.maps.LatLng(-34.397, 150.644),
+						zoom: 8,
+						mapTypeId: google.maps.MapTypeId.ROADMAP
+					};
+					
+					map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+					
+					// initialize push notifications
+					var pushManager = new PushNotificationManager();
+					
+					pushManager.register(function(token) {
+						mosync.rlog("registered for push notifications");
+						// subscribe the current device to the push notification channel
+						pushToken = token;
+					},
+					function(error) {
+						mosync.rlog("Error while subscribing for push notifications " + JSON.stringify(error));
+					});
+				},
+				true
+			);
+			
+			// grabs the new position and updates the map
+			function updateLocation() {
+				navigator.geolocation.getCurrentPosition(
+					function (position) {
+						mosync.rlog("received position: lat: " + position.coords.latitude + " lng: " + position.coords.longitude);
+						currentPosition = new CBHelperCurrentLocation(position.coords.latitude, position.coords.longitude, position.coords.altitude);
+						// set the current location in the helper class
+						helper.currentLocation = currentPosition;
+						// re-center the map
+						var newCenter = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+						map.setCenter(newCenter);
+						// update friends locations
+						updateLocations();
+					},
+					function (error) {
+						mosync.rlog("Error while updating location");
+						mosync.rlog(error.message);
+					}
+				);
+			}
+			
+			// checkin function to inser the position in the history and the latest positions collection
+			function doCheckin() {
+				if ( currentPosition && localStorage ) {
+					var user = localStorage.CloudSquareUser;
+					
+					// first use the google applet to get the address from a location
+					helper.executeApplet("cb_get_address_from_coordinates", { "lat" : currentPosition.lat, "lng" : currentPosition.lng }, function(resp) {
+						if ( resp.callStatus && resp.outputData["return"].formatted_address != "" ) {
+							//mosync.rlog(JSON.stringify(resp.outputData["return"]));
+							var address = resp.outputData["return"].formatted_address;
+							mosync.rlog("using " + address + " as address");
+							// we don't need to set the coordinates here as they are inserted
+							// automatically by the helper class since the currentLocation
+							// property of the helper class is set by the updateLocation function
+							var newCheckin = {
+								"user" : user,
+								"address" : address,
+								"time" : new Date().getTime()
+							}
+							var city = "";
+							// subscribe to the push notification channel for the current city
+							if ( pushToken ) {
+								// loop over all the different parts of the address and look for administrative_area_level_2
+								// which is the city region
+								for ( index in resp.outputData["return"].address_components ) {
+									var curComponent = resp.outputData["return"].address_components[index];
+									if ( curComponent.types && curComponent.types.length > 0 && curComponent.types[0] == "administrative_area_level_2" ) {
+										city = curComponent.short_name;
+										break;
+									}
+								}
+								
+								// if we have one then we create a new notification channel for that region. this way we can 
+								// notify all devices in the area
+								if ( city != "" ) {
+									mosync.rlog("subscribing to channel " + city);
+									helper.registerDeviceForNotifications(pushToken, city, function(registrationOutcome) {
+										mosync.rlog("registration for push notifications: " + registrationOutcome);
+									});
+								}
+							}
+							
+							helper.insertDocument("checkins", newCheckin, null, function(resp) {
+								if ( resp.callStatus ) {
+									// ok now we update the user's position in the collection
+									// with the latest positions. We could just use the aggregate functions
+									// to get the latest position for a user but keeping the collection smaller
+									// 1 record per user will make it faster
+									helper.searchDocuments({ "user" : user }, "latest_position", function(searchResp) {
+										if ( searchResp.callStatus ) {
+											// we already have a record for the user - update existing
+											if ( searchResp.outputData.length > 0 ) {
+												helper.updateDocument(newCheckin, { "user" : user }, "latest_position", null, function(updateResp) {
+													mosync.rlog(updateResp.outputString);
+												});
+											} else {
+												helper.insertDocument("latest_position", newCheckin, null, function(insertResp) {
+													mosync.rload(insertResp.outputString);
+												});
+											}
+											// if we know the city then we push a notification to all subscribers
+											if ( city != "" && pushToken ) {
+												// the last parameter is the iOS certificate type
+												helper.sendNotification("I'm in " + city, city, "development");
+											}
+										}
+									});
+								}
+							});
+						}
+					});
+				}
+			}
+			
+			// update locations
+			function updateLocations() {
+				if ( helper && currentPosition ) {
+					// geolocation search over the latest_position collection to find all the users nearby
+					var search = {
+						'cb_location' : {
+							'$near' : [ currentPosition.lat, currentPosition.lng ],
+							'$maxDistance' : (5000/1000)/111.12 // 5km (5000 meters converted to radians)
+						}
+					};
+					
+					helper.searchDocuments(search, "latest_position", function(resp) {
+						if ( resp.callStatus ) {
+							for ( index in resp.outputData ) {
+								var user = resp.outputData[index];
+								// add the marker to the map
+								var userPos = new google.maps.LatLng(user.cb_location.lat, user.cb_location.lng);
+								var marker = new google.maps.Marker({
+									position: userPos,
+									map: map,
+									title: user.user + " - " + user.address,
+									clickable: true
+								});
+								mosync.rlog("added to map " + marker.getTitle());
+							}
+						}
+					});
+				}
+			}
+			
+			function logout() {
+				if ( localStorage && localStorage.CloudSquareUser ) {
+					localStorage.removeItem("CloudSquareUser");
+					localStorage.removeItem("CloudSquarePassword");
+					document.location.href = 'index.html';
+				}
+			}
+			
+			// Close the application when the back key is pressed.
+			document.addEventListener(
+				"backbutton",
+				function() { mosync.app.exit(); },
+				true);
+			
+			
+		</script>
+	</head>
+	<body>
+		<div id="screen">
+			<div class="pane" id="heading">CloudSquare</div>
+			<div id="map-canvas"></div>
+			<div class="pane button" onclick="doCheckin();">Check in</div>
+			<a href="javascript:void(0);" onclick="logout()">logout</a>
+		</div>
+	</body>
+</html>
