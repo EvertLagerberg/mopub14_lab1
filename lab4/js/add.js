@@ -1,6 +1,10 @@
-//var buttonSend = $("#buttonSend");
+var buttonSend = $("#buttonSend");
 
+<<<<<<< HEAD
 function clicker(){
+=======
+function clicker() {
+>>>>>>> de2e5869d2825f36d3b25d0bc523ffac47b6a311
 // First initialise the helper object with the code, secret code 
 // and the generic helper
 
