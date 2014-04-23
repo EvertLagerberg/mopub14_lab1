@@ -1,7 +1,7 @@
-Name,Desc,Category,Location,price-range,image
-Pizza C:o, Pizza i alla Smaker, Pizza, Stockholm, 50-180 kr, http://cache.boston.com/bonzai-fba/Original_Photo/2011/11/23/pizza__1322067494_5957.jpg
-Mycket mat, Bli garanterat mätt, Mums, Norrtälje, 100-150 kr,http://2.bp.blogspot.com/__rXPA38b8zY/SwrWeHnVU0I/AAAAAAAAAI8/8UCGNyAHJ7M/s1600/DSC01741.JPG
-Mr pasta, Pasta i olika sorter, Italiana, Stockholm, 70-160 kr,  http://mda.bigoven.com/pics/rs/256/new-new-orleans-pasta.jpg
-China Food, Unik mat för alla, Chinesse, Stockholm, 100-300 kr, http://www.thechinesequest.com/wp-content/uploads/2014/02/chinesefood1.jpg
-Ms Husman, Bästa boten mot hunger, Husmanskost, Norrtälje, 70-140 kr, http://static.kokaihop.se/recipe/large/22471941-22472344.jpg
-Fine slice, Pizza med bra råvaror, Pizza, Norrtälje, 75-155 kr,http://incrediblemos.com/wp-content/uploads/2013/01/pizza-slice.jpg
+Name,Desc,Category,Location,minprice,maxprice,image
+Pizza C:o,Pizza för alla Smaker,Pizza,Stockholm,50,180,http://cache.boston.com/bonzai-fba/Original_Photo/2011/11/23/pizza__1322067494_5957.jpg
+Mycket mat,Bli garanterat mätt,Mums,Norrtälje,100,150,http://2.bp.blogspot.com/__rXPA38b8zY/SwrWeHnVU0I/AAAAAAAAAI8/8UCGNyAHJ7M/s1600/DSC01741.JPG
+Mr pasta,Pasta i olika sorter,Italiana,Stockholm,70,160,http://mda.bigoven.com/pics/rs/256/new-new-orleans-pasta.jpg
+China Food,Unik mat för alla,Chinesse,Stockholm,100,300,http://www.thechinesequest.com/wp-content/uploads/2014/02/chinesefood1.jpg
+Ms Husman,Bästa boten mot hunger,Husmanskost,Norrtälje,70,140,http://static.kokaihop.se/recipe/large/22471941-22472344.jpg
+Fine slice,Pizza med bra råvaror,Pizza,Norrtälje,75,155,http://incrediblemos.com/wp-content/uploads/2013/01/pizza-slice.jpg
