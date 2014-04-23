@@ -1,6 +1,6 @@
 //var buttonSend = $("#buttonSend");
 
-buttonSend.on('click', function() {
+function clicker(){
 // First initialise the helper object with the code, secret code 
 // and the generic helper
 
@@ -26,4 +26,4 @@ var dataObject = {
 helper.insertDocument("users", dataObject, null, function(resp) {
     hyper.log(resp.outputString);
 });
-})
+}
