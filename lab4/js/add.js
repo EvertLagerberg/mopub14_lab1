@@ -5,9 +5,9 @@ function clicker() {
 // and the generic helper
 
 
-var helper = new CBHelper("etlab5", "9442427e8711f8cab4e46ad918de9984", new GenericHelper());
+var helper = new CBHelper("lab5et", "12099a8a0e647583d433bade71f6451b", new GenericHelper());
 // use the md5 library provided to set the password
-helper.setPassword(hex_md5("lab5et"));
+helper.setPassword(hex_md5("etlab5"));
 
 // create an object to be inserted in our CloudBase instance,
 // e.g a firstName, lastName and title into a collection called ‘users’
