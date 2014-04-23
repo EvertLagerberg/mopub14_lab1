@@ -181,6 +181,73 @@ function geolocation(callback) {
 
 
 
+<<<<<<< HEAD
+      // Grab the elements
+       input = $("#input");
+       username = $("#username");
+       channel = "Other";
+      var buttonSend = $("#buttonSend");
+      var buttonHistory = $("#buttonHistory");
+      var output = $("#output");
+     
+       if (input.val() != '' && username.val != ('')){
+       	
+            Communication(channel, username, input, output)
+            
+            Communication(channel, username, input, output)
+            Communication(channel, username, input, output)
+            
+            Communication(channel, username, input, output)
+            Communication(channel, username, input, output)
+            
+            Communication(channel, username, input, output)
+            Communication(channel, username, input, output)
+            
+            Communication(channel, username, input, output)
+          
+          }
+      };
+          
+    function Communication(channel, username, input, output){
+    	 
+    	  var text = output.html();
+    	 
+    	  
+    	  pubnub.publish({
+            'channel' : channel,
+            'message' : "<br /><b>" + username.val() + " says:</b><br />" + input.val() + "<br />"
+			 
+          })
+          
+         
+          pubnub.subscribe({
+           'channel'   : channel,
+           'callback'  : function(message) {
+            output.html(text + '<br />' + "Channel: " + channel + message);
+            input.val('');
+          }
+          
+        })
+        if (text==""){
+         pubnub.publish({
+            'channel' : channel,
+            'message' : "<br /><b>" + username.val() + " says:</b><br />" + input.val() + "<br />"
+			 
+          })
+          
+         
+          pubnub.subscribe({
+           'channel'   : channel,
+           'callback'  : function(message) {
+            output.html(text + '<br />' + "Channel: " + channel + message);
+            input.val('');
+          }
+          
+        })
+        }
+        }
+=======
+>>>>>>> df127eea2e868072e66c2532e1bb9f7cd022e9d4
 
 
 
