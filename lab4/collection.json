@@ -1,0 +1,20 @@
+[
+	{
+		"custom_column_1" : 123,
+		"first_name" : "johnny",
+		"last_name" : "appleseed",
+		"custom_array" : [ "United Kingdom", "United States" ]
+	},
+	{
+		"custom_column_1" : 124,
+		"first_name" : "John",
+		"last_name" : "Doe",
+		"custom_array" : [ "India", "China" ]
+	},
+	{
+		"custom_column_1" : 125,
+		"first_name" : "Steve",
+		"last_name" : "Jobs",
+		"custom_array" : [ "South Africa", "Botswana" ]
+	}
+]

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--
+* @file index.html
+*
+* The main CloudSquare entry file. This will display the login box and/or log in the user automatically
+-->
+<html>
+	<head>
+		<meta name="viewport" content="width=320, user-scalable=no">
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>CloudSquare</title>
+		<link rel="stylesheet" href="style.css" type="text/css" media="screen" title="no title" charset="utf-8">
+		<script type="text/javascript" charset="utf-8" src="js/wormhole.js"></script>
+		<!--  include all the required CBHelper libraries: XMLHttpRequest, md5, json and the MoSync specific helper -->
+		<script type="text/javascript" charset="utf-8" src="js/CBHelper/md5.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/CBHelper/json.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/CBHelper/CBXMLHttpRequest.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/CBHelper/CBHelper.js"></script>
+		<script type="text/javascript" charset="utf-8" src="js/CBHelper/platforms/MoSyncHelper.js"></script>
+		<script type="text/javascript">
+			var helper; // global helper class variable initialized when the document is ready and used by all function
+			
+			document.addEventListener(
+				"DOMContentLoaded", // when the document is ready
+				function() {
+					if ( !helper ) {
+						// initialize a new MoSyncHelper object
+						var moSyncHelper = new MoSyncHelper();
+						    
+						// initialize a new CBHelper object with the
+						// MoSync Helper object
+						helper = new CBHelper("cloudsquare", "CB_KEY_GOES_HERE", moSyncHelper);
+						helper.setPassword(hex_md5("WRITE_CB_PASSWORD_HERE"));
+						
+						// check if we have access to the local storage and a user is already setup
+						if ( localStorage && localStorage.CloudSquareUser ) {
+							// the application is not setup to require user authentication
+							// so setting these parameters is reduntant - however setting them
+							// will cause the data API to keep an audit trail in the database, which is good
+							// since it's an open application
+							helper.authUsername = localStorage.CloudSquareUser;
+							helper.authPassword = localStorage.CloudSquarePassword;
+							
+							// call the doLogin method to authneticate the user
+							doLogin(localStorage.CloudSquareUser, localStorage.CloudSquarePassword)
+						}
+					}
+				},
+				true
+			);
+			
+			// Close the application when the back key is pressed.
+			document.addEventListener(
+				"backbutton",
+				function() { mosync.app.exit(); },
+				true);
+			
+			// logs in a user calling the cloudbase.io APIs
+			function doLogin(username, password) {
+				// setup the login condition variable to run a search over the users
+				// in the database
+				var loginCondition = {
+					"username" : username.toLowerCase(),
+					"password" : password
+				};
+				// search the users collection with the parameters - if we receive a user back it means 
+				// the user exists in the cloud database and is authenticated
+				helper.searchDocuments(loginCondition, "users", function(resp) {
+					if ( resp.callStatus ) {
+						mosync.rlog(resp.outputString);
+						// it's a valid user
+						if ( resp.outputData.length > 0 ) {
+							localStorage.CloudSquareUser = username;
+							localStorage.CloudSquarePassword = password;
+							mosync.rlog("logged in");
+							document.location.href = 'home.html';
+						}
+					}
+				});
+			}
+			
+			// starts the login process by grabbing the value from the fields
+			// and calls the doLogin function - this is here just to avoid
+			// putting long JS lines in the HTML 
+			function startLogin() {
+				var username = document.getElementById('username').value;
+				var password = document.getElementById('pwd').value;
+				
+				doLogin(username, hex_md5(password));
+			}
+		</script>
+	</head>
+	<body>
+		<div id="screen">
+			<div class="pane" id="heading">CloudSquare</div>
+			<div class="pane" id="info">
+				<input type="text" name="username" id="username" placeholder="Username" />
+				<input type="password" name="pwd" id="pwd" placeholder="Password" />
+			</div>
+			<div class="pane button" onclick="startLogin();">Login</div>
+			<div class="spacer"></div>
+			<div class="pane button" onclick="document.location.href='register.html';">Register</div>
+		</div>
+	</body>
+</html>
