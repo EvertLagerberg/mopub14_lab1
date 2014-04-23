@@ -23,7 +23,7 @@ var dataObject = {
 // in the users collection then print out the response using the
 // outputString property of the CBHelperResponseInfo object
 
-helper.insertDocument("users", dataObject, null, function(resp) {
+helper.insertDocument("Rest", dataObject, null, function(resp) {
     hyper.log(resp.outputString);
 });
 }

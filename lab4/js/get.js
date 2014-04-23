@@ -2,9 +2,7 @@
 
 
 
-function getData(){
-
-	
+function getData(){	
 // First initialise the helper object with the code, secret code 
 // and the generic helper
 var helper = new CBHelper("lab5et", "12099a8a0e647583d433bade71f6451b", new GenericHelper());
@@ -12,7 +10,7 @@ var helper = new CBHelper("lab5et", "12099a8a0e647583d433bade71f6451b", new Gene
 helper.setPassword(hex_md5("etlab5"));
 
 
-	var searchCondition = { "Name" : "Mycket Mat" };
+	var searchCondition = { "Name" : "Mycket mat" };
 	// call the searchDocuments function
 	helper.searchDocuments(searchCondition,"Rest", function(resp) {
         // uncomment next row to get entire string
