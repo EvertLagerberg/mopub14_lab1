@@ -181,7 +181,6 @@ function geolocation(callback) {
 
 
 
-<<<<<<< HEAD
       // Grab the elements
        input = $("#input");
        username = $("#username");
@@ -246,8 +245,7 @@ function geolocation(callback) {
         })
         }
         }
-=======
->>>>>>> df127eea2e868072e66c2532e1bb9f7cd022e9d4
+
 
 
 
