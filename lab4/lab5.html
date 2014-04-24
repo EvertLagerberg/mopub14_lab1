@@ -39,12 +39,34 @@
                 data-transition="pop"
                 data-position-to="window">Select theme</a>
         </div>
-         <div data-role="content"> 
-			 <button onclick="clicker()">send</button>
-			 <button onclick="getData()">get</button>
-			 <ul>
-	    <div id="result"></div>
-	</div>
+          <div> 
+            <ul data-role="listview" data-inset="true" id="result" class="test">
+            </ul>
+         </div>
+         <div data-role="content">
+			 <button onclick="getData()">Get all</button>
+			 <label for="param" class="select">Search on:</label>
+			 <select id="param">
+				 <option value="Name">Name</option>
+				 <option value="Category">Category</option>
+				 <option value="Location">Location</option>
+			</select>
+			 <input type="text" name="name" id="searchValue"/>
+			 <button onclick="getSearchData()">Search</button>
+
+		</div>
+</div>
+
+<div data-role="page" id="Comment">
+        <div data-role="header" data-position="fixed">
+            <h1>Side</h1>
+            <a href="#page-contents"
+                data-role="button"
+                class="ui-btn-left"
+                data-icon="arrow-l">Back</a>
+        </div>
+        <div data-role="content">  
+        </div>
 </div>
 
 </body>
