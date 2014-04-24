@@ -12,23 +12,17 @@
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 		<title>CloudSquare</title>
 		<link rel="stylesheet" href="style.css" type="text/css" media="screen" title="no title" charset="utf-8">
+		  <!-- JQuery libraries -->
+      <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+      <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
 		<script type="text/javascript" charset="utf-8" src="js/wormhole.js"></script>
 		<script type="text/javascript" charset="utf-8" src="js/add.js"></script>
-		<script type="text/javascript" charset="utf-8" src="js/get.js"></script>
 		<script type="text/javascript" charset="utf-8" src="js/CBHelper/md5.js"></script>
 		<script type="text/javascript" charset="utf-8" src="js/CBHelper/json.js"></script>
 		<script type="text/javascript" charset="utf-8" src="js/CBHelper/CBXMLHttpRequest.js"></script>
 		<script type="text/javascript" charset="utf-8" src="js/CBHelper/CBHelper.js"></script>
 		<script type="text/javascript" charset="utf-8" src="js/CBHelper/platforms/GenericHelper.js"></script>
 		<script type="text/javascript" charset="utf-8" src="js/CBHelper/platforms/MoSyncHelper.js"></script>
-		<script type="text/javascript" charset="utf-8" src="js/CBHelper/platforms/BBWebWorksHelper.js"></script>
-		<script type="text/javascript" charset="utf-8" src="js/CBHelper/platforms/TizenHelper.js"></script>
-
-		      <!-- JQuery libraries -->
-      <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-      <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
-		
-		
 		  <script src="https://maps.googleapis.com/maps/api/js?AIzaSyBXpGBUg6st-2CP2-t-CwV-qRiMU2i7Z9g&sensor=false"></script>
 		<script type="text/javascript">
 			var helper; // the CBHelper object
@@ -38,7 +32,9 @@
 <body>
  <button onclick="clicker()">send</button>
  <button onclick="getData()">get</button>
-<div id="output" style="margin-top:10px"></div>
+ <ul>
+ <div id="result"></div>
+
             
 </body>
 
