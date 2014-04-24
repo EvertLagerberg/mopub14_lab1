@@ -57,8 +57,8 @@ helper.setPassword(hex_md5("etlab5"));
 						rest.Category+
 						"</li>"+
 						"<li>"+
-						//rest.minprice + " - " rest.maxprice +
-						//"</li>"+
+						rest.minprice + " - " + rest.maxprice +
+						"</li>"+
 						"</ul>"+
 						"<br/>"
         		);
