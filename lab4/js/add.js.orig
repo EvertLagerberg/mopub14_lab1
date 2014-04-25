@@ -40,32 +40,17 @@ helper.insertDocument("Rest", dataObject, null, function(resp) {
 });
 }
 
-function getContent(Name, Image,Desc, Category, Minprice, Maxprice){
-	$("#Head").empty();
-	$("#Info").empty();
-	$("#Comment").ready(function() {
-		$( "#Head" ).append(Name);
-		$( "#Info" ).append(
-		" <li><img src = "+ Image +">"
-		+"Description: "+Desc+"<br/>"
-		+"Category: "+Category+"<br/>"+
-		+ Minprice + " - " + Maxprice + " kr" + "<br>" +
-		"<br/></li>"
-		
-		);
-		});
-	$("#Info").listview('refresh');
-	}
+
+
+
 
 function getData(){	
 
 var helper = new CBHelper("lab5et", "12099a8a0e647583d433bade71f6451b", new GenericHelper());
 // use the md5 library provided to set the password
 helper.setPassword(hex_md5("etlab5"));
-
 	
 	helper.searchAllDocuments("Rest", function(resp){
-		$("#result").empty();
 		for (index in resp.outputData){
         		var rest = resp.outputData[index];
 
@@ -87,23 +72,49 @@ helper.setPassword(hex_md5("etlab5"));
         		}
         		var votesMean = votesTotal/i;
         		console.log(votesMean);
-                console.log("Hej");
-                console.log($('#username').val());
         	}
-			
+
+
         		$("#result").append(
         			"<li>"+
-        			"<a onclick="+ '"' + "getContent("+"'"+rest.Name+"',"+"'"+rest.Image +"',"+"'"+rest.Desc +"',"+"'"+rest.Category +"',"+"'"+rest.Minprice+"',"+"'"+rest.Maxprice +"'"+")" + '"' + "href='#Comment'><img src = "+ rest.Image +">"+
+<<<<<<< HEAD
+        				rest.Name+
+						"</li>"+
+						"<li>"+
+						rest.Desc+
+						"</li>"+
+						"<li>"+
+						rest.Location+
+						"</li>"+
+						"<li>"+
+						rest.Category+
+						"</li>"+
+						"<li>"+
+						rest.Minprice + " - " + rest.Maxprice +
+						"</li>"+
+						"<li>"+
+						votesMean +
+						"</li>"+
+						"<li>"+
+						
+						commentlist+
+						
+						"</li>"+
+						"</ul>"+
+						"<br/>"
+=======
+        			"<a href='#Comment'><img src = "+ rest.Image +">"+
         				rest.Name+ "<br/>"+
         				rest.Desc+ "<br/>" +
         				rest.Category + "<br/>" +
         				rest.Minprice + " - " + rest.Maxprice + " kr" + "<br>" +
 					"</a></li>"
+>>>>>>> 60a447cb539651b4a2a0297dd31ac42399f24ad1
         		);
         	}
-        $("#result").listview('refresh');
+        $('ul').listview('refresh');
 	});
-return false;}
+return false}
 
 
 function getSearchData(){	
@@ -111,30 +122,29 @@ function getSearchData(){
 var helper = new CBHelper("lab5et", "12099a8a0e647583d433bade71f6451b", new GenericHelper());
 // use the md5 library provided to set the password
 helper.setPassword(hex_md5("etlab5"));
-	$("#result").empty();
+
 	var searchValue = $("#searchValue").val();
 	var param = $("#param").val();
 	
-	alert("Hej"+param);
+	alert(param);
 	alert(searchValue);
-	var searchCondition = {"Name":"Pizza C:o"};
+	var searchCondition = { param : searchValue};
 
 	
 	helper.searchDocuments(searchCondition, "Rest", function(resp){
 		for (index in resp.outputData){
 		
         		var rest = resp.outputData[index];				
-        	$("#result").append(
+        		$("#result").append(
         			"<li>"+
-        			"<a onclick="+ '"' + "getContent("+"'"+rest.Name+"',"+"'"+rest.Image +"',"+"'"+rest.Desc +"',"+"'"+rest.Category +"',"+"'"+rest.Minprice+"',"+"'"+rest.Maxprice +"'"+")" + '"' + "href='#Comment'><img src = "+ rest.Image +">"+
+        			"<a href='#Comment'><img src = "+ rest.Image +">"+
         				rest.Name+ "<br/>"+
         				rest.Desc+ "<br/>" +
         				rest.Category + "<br/>" +
         				rest.Minprice + " - " + rest.Maxprice + " kr" + "<br>" +
 					"</a></li>"
         		);
-
         	}
-        $('#result').listview('refresh');
+        $('ul').listview('refresh');
 	});
-return false;}
+return false}
