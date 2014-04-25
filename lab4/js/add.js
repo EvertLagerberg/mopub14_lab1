@@ -40,11 +40,22 @@ helper.insertDocument("Rest", dataObject, null, function(resp) {
 });
 }
 
-function getContent(name){
+function getContent(Name, Image,Desc, Category, Minprice, Maxprice){
+	$("#Head").empty();
+	$("#Info").empty();
 	$("#Comment").ready(function() {
-		$( "#Head" ).append(name);
+		$( "#Head" ).append(Name);
+		$( "#Info" ).append(
+		" <li><img src = "+ Image +">"
+		+"Description: "+Desc+"<br/>"
+		+"Category: "+Category+"<br/>"+
+		+ Minprice + " - " + Maxprice + " kr" + "<br>" +
+		"<br/></li>"
+		
+		);
 		});
-		}
+	$("#Info").listview('refresh');
+	}
 
 function getData(){	
 
@@ -53,6 +64,7 @@ var helper = new CBHelper("lab5et", "12099a8a0e647583d433bade71f6451b", new Gene
 helper.setPassword(hex_md5("etlab5"));
 	
 	helper.searchAllDocuments("Rest", function(resp){
+		$("#result").empty();
 		for (index in resp.outputData){
         		var rest = resp.outputData[index];
 
@@ -75,11 +87,10 @@ helper.setPassword(hex_md5("etlab5"));
         		var votesMean = votesTotal/i;
         		console.log(votesMean);
         	}
-
-
+			
         		$("#result").append(
         			"<li>"+
-        			"<a onclick="+ '"' + "getContent("+"'"+rest.Name+"'"+")" + '"' + "href='#Comment'><img src = "+ rest.Image +">"+
+        			"<a onclick="+ '"' + "getContent("+"'"+rest.Name+"',"+"'"+rest.Image +"',"+"'"+rest.Desc +"',"+"'"+rest.Category +"',"+"'"+rest.Minprice+"',"+"'"+rest.Maxprice +"'"+")" + '"' + "href='#Comment'><img src = "+ rest.Image +">"+
         				rest.Name+ "<br/>"+
         				rest.Desc+ "<br/>" +
         				rest.Category + "<br/>" +
@@ -87,9 +98,9 @@ helper.setPassword(hex_md5("etlab5"));
 					"</a></li>"
         		);
         	}
-        $('ul').listview('refresh');
+        $("#result").listview('refresh');
 	});
-return false}
+return false;}
 
 
 function getSearchData(){	
@@ -97,29 +108,30 @@ function getSearchData(){
 var helper = new CBHelper("lab5et", "12099a8a0e647583d433bade71f6451b", new GenericHelper());
 // use the md5 library provided to set the password
 helper.setPassword(hex_md5("etlab5"));
-
+	$("#result").empty();
 	var searchValue = $("#searchValue").val();
 	var param = $("#param").val();
 	
-	alert(param);
+	alert("Hej"+param);
 	alert(searchValue);
-	var searchCondition = { param : searchValue};
+	var searchCondition = {"Name":"Pizza C:o"};
 
 	
 	helper.searchDocuments(searchCondition, "Rest", function(resp){
 		for (index in resp.outputData){
 		
         		var rest = resp.outputData[index];				
-        		$("#result").append(
+        	$("#result").append(
         			"<li>"+
-        			"<a href='#Comment'><img src = "+ rest.Image +">"+
+        			"<a onclick="+ '"' + "getContent("+"'"+rest.Name+"',"+"'"+rest.Image +"',"+"'"+rest.Desc +"',"+"'"+rest.Category +"',"+"'"+rest.Minprice+"',"+"'"+rest.Maxprice +"'"+")" + '"' + "href='#Comment'><img src = "+ rest.Image +">"+
         				rest.Name+ "<br/>"+
         				rest.Desc+ "<br/>" +
         				rest.Category + "<br/>" +
         				rest.Minprice + " - " + rest.Maxprice + " kr" + "<br>" +
 					"</a></li>"
         		);
+
         	}
-        $('ul').listview('refresh');
+        $('#result').listview('refresh');
 	});
-return false}
+return false;}
