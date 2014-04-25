@@ -40,17 +40,17 @@ helper.insertDocument("Rest", dataObject, null, function(resp) {
 });
 }
 
-function getContent(rest){
+function getContent(Name, Image,Desc, Category, Minprice, Maxprice, commentlist){
 	$("#Head").empty();
 	$("#Info").empty();
 	$("#Comment").ready(function() {
-		$( "#Head" ).append(rest.Name);
+		$( "#Head" ).append(Name);
 		$( "#Info" ).append(
-		" <li><img src = "+ rest.Image +">"
-		+"Description: "+rest.Desc+"<br/>"
-		+"Category: "+rest.Category+"<br/>"+
-		+ rest.Minprice + " - " + rest.Maxprice + " kr" + "<br>" +
-		"<br/></li>"
+		" <li><img src = "+ Image +">"
+		+"Description: "+Desc+"<br/>"
+		+"Category: "+Category+"<br/>"+
+		+ Minprice + " - " + Maxprice + " kr" + "<br>" +
+		commentlist+"<br/></li>"
 		
 		);
 		});
