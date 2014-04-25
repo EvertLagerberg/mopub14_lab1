@@ -70,11 +70,13 @@
         	<div>
         		 <ul data-role="listview" data-inset="true" id="Info">
             </ul>
+            <ul data-role="listview" data-inset="true" id="CommentList">
+            </ul>
         	</div>
         	<div class="table">
                
-                <input id="username" name="username" type="text" placeholder="enter your comment here" data-mini="true" value= "My favorite!">
-                <input id="rating" name="rating" type="text" placeholder="Enter rating 1-5" data-mini="true" value="3">
+                <input id="username" name="username" type="text" placeholder="enter your comment here" data-mini="true">
+                <input id="rating" name="rating" type="text" placeholder="Enter rating 1-5" data-mini="true">
 
 
               </div>
@@ -85,7 +87,7 @@
               <!-- Button -->
               <div class="table">
 
-                <button id="buttonSend" name="buttonSend">Send</button>
+                <button id="buttonSend" onclick="updateObject()" name="buttonSend">Send</button>
 
               </div>
 </div>

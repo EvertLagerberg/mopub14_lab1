@@ -117,7 +117,7 @@ helper.setPassword(hex_md5("etlab5"));
 	
 	alert("Hej"+param);
 	alert(searchValue);
-	var searchCondition = {"Name":"Pizza C:o"};
+	var searchCondition = {"Name":SearchValue};
 
 	
 	helper.searchDocuments(searchCondition, "Rest", function(resp){
@@ -138,3 +138,32 @@ helper.setPassword(hex_md5("etlab5"));
         $('#result').listview('refresh');
 	});
 return false;}
+
+
+function updateObject() {
+
+var helper = new CBHelper("lab5et", "12099a8a0e647583d433bade71f6451b", new GenericHelper());
+// use the md5 library provided to set the password
+helper.setPassword(hex_md5("etlab5"));
+
+var comment = $('#username').val();
+var rate = $('#Head').text();
+var SearchValue = $('#Head').text();
+var param = "Name";
+
+var searchCondition = {"Name" : $('#Head').text()};
+    
+    helper.searchDocuments(searchCondition, "Rest", function(resp){
+        for (index in resp.outputData){
+                var rest = resp.outputData[index];              
+                 console.log(rest.Comments[0][1])          	            
+                //var newComment rest.Comments.push([rate,comment]);
+                
+               // var Object {
+	           //     "Comments" : newComment
+                //};
+                
+                //helper.updateDocument(Object, searchCondition, "Rest")
+            }
+    });
+return false}
