@@ -40,7 +40,7 @@ helper.insertDocument("Rest", dataObject, null, function(resp) {
 });
 }
 
-function getContent(Name, Image,Desc, Category, Minprice, Maxprice){
+function getContent(Name, Image,Desc, Category, Minprice, Maxprice, commentlist){
 	$("#Head").empty();
 	$("#Info").empty();
 	$("#Comment").ready(function() {
@@ -50,7 +50,7 @@ function getContent(Name, Image,Desc, Category, Minprice, Maxprice){
 		+"Description: "+Desc+"<br/>"
 		+"Category: "+Category+"<br/>"+
 		+ Minprice + " - " + Maxprice + " kr" + "<br>" +
-		"<br/></li>"
+		"<br/></li>"+commentlist
 		
 		);
 		});
@@ -93,7 +93,7 @@ helper.setPassword(hex_md5("etlab5"));
 			
         		$("#result").append(
         			"<li>"+
-        			"<a onclick="+ '"' + "getContent("+"'"+rest.Name+"',"+"'"+rest.Image +"',"+"'"+rest.Desc +"',"+"'"+rest.Category +"',"+"'"+rest.Minprice+"',"+"'"+rest.Maxprice +"'"+")" + '"' + "href='#Comment'><img src = "+ rest.Image +">"+
+        			"<a onclick="+ '"' + "getContent("+"'"+rest.Name+"',"+"'"+rest.Image +"',"+"'"+rest.Desc +"',"+"'"+rest.Category +"',"+"'"+rest.Minprice+"',"+"'"+rest.Maxprice +"',"+"'"+commentlist +"'"+")" + '"' + "href='#Comment'><img src = "+ rest.Image +">"+
         				rest.Name+ "<br/>"+
         				rest.Desc+ "<br/>" +
         				rest.Category + "<br/>" +
@@ -147,7 +147,7 @@ var helper = new CBHelper("lab5et", "12099a8a0e647583d433bade71f6451b", new Gene
 helper.setPassword(hex_md5("etlab5"));
 
 var comment = $('#username').val();
-var rate = $('#Head').text();
+var rate = $('#rating').val();
 var SearchValue = $('#Head').text();
 var param = "Name";
 
@@ -156,14 +156,21 @@ var searchCondition = {"Name" : $('#Head').text()};
     helper.searchDocuments(searchCondition, "Rest", function(resp){
         for (index in resp.outputData){
                 var rest = resp.outputData[index];              
-                rest.Comments.push([2,"mmm"]);     
-                console.log(rest.Comments[2][1]);  	            
+                rest.Comments.push([comment,rate]);      	            
                 
-                var object {
+                var object = {
+                	 "Name" : rest.Name,
+                	 "Desc" : rest.Desc,
+                	 "Category" : rest.Category,
+                	 "Location" : rest.Location,
+                	 "Minprice" : rest.Minprice,
+                	 "Maxprice" : rest.Maxprice,
+                	 "Image" : rest.Image,
+                	 "Rating" : rest.Rating,
 	                 "Comments" : rest.Comments
                 };
                 
-                //helper.updateDocument(Object, searchCondition, "Rest")
+                helper.updateDocument(object, searchCondition, "Rest");
             }
     });
 return false}
