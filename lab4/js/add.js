@@ -40,9 +40,11 @@ helper.insertDocument("Rest", dataObject, null, function(resp) {
 });
 }
 
-
-
-
+function getContent(name){
+	$("#Comment").ready(function() {
+		$( "#Head" ).append(name);
+		});
+		}
 
 function getData(){	
 
@@ -80,7 +82,7 @@ helper.setPassword(hex_md5("etlab5"));
 
         		$("#result").append(
         			"<li>"+
-        			"<a href='#Comment'><img src = "+ rest.Image +">"+
+        			"<a onclick="+ '"' + "getContent("+"'"+rest.Name+"'"+")" + '"' + "href='#Comment'><img src = "+ rest.Image +">"+
         				rest.Name+ "<br/>"+
         				rest.Desc+ "<br/>" +
         				rest.Category + "<br/>" +
