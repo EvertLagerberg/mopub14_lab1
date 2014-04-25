@@ -156,12 +156,12 @@ var searchCondition = {"Name" : $('#Head').text()};
     helper.searchDocuments(searchCondition, "Rest", function(resp){
         for (index in resp.outputData){
                 var rest = resp.outputData[index];              
-                 console.log(rest.Comments[0][1])          	            
-                //var newComment rest.Comments.push([rate,comment]);
+                rest.Comments.push([2,"mmm"]);     
+                console.log(rest.Comments[2][1]);  	            
                 
-               // var Object {
-	           //     "Comments" : newComment
-                //};
+                var object {
+	                 "Comments" : rest.Comments
+                };
                 
                 //helper.updateDocument(Object, searchCondition, "Rest")
             }
