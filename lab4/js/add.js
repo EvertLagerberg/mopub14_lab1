@@ -60,8 +60,13 @@ function getContent(Name, Image,Desc, Category, Minprice, Maxprice, votesMean, c
 			
 			if (commentlist[i] != ","){
 				Comment = Comment+commentlist[i];
+				
 			}
-			else{
+			else {
+				$("#Info").append("<li> Comment: " + Comment + "</li>");
+				Comment = "";
+			}
+			if (i == commentlist.length-1){
 				$("#Info").append("<li> Comment: " + Comment + "</li>");
 				Comment = "";
 			}
@@ -89,7 +94,6 @@ helper.setPassword(hex_md5("etlab5"));
         			console.log("Tja");
         		for (var i=0;i<rest.Comments.length; i++) {
         			console.log(rest.Comments[i][1]);
-
         			votesTotal = votesTotal + rest.Comments[i][0];
         			console.log(votesTotal);
         			console.log("addcomment = " + rest.Comments[i][1]);
@@ -97,10 +101,10 @@ helper.setPassword(hex_md5("etlab5"));
         		}
         		var votesMean = votesTotal/i;
         		console.log(votesMean);
-                console.log("Hej");
+                
                 console.log($('#username').val());
         	}
-			console.log("test1 = " +commentlist.length);
+			console.log("Hej ----------->" + commentlist );;
         		$("#result").append(
         			"<li>"+
         			"<a onclick="+ '"' + "getContent("+"'"+rest.Name+"',"+"'"+rest.Image +"',"+"'"+rest.Desc +"',"+"'"+rest.Category +"',"+"'"+rest.Minprice+"',"+"'"+rest.Maxprice +"',"+"'"+votesMean  +"',"+"'"+ commentlist +"'"+")" + '"' + "href='#Comment'><img src = "+ rest.Image +">"+
@@ -160,6 +164,7 @@ var comment = $('#username').val();
 var rate = $('#rating').val();
 var SearchValue = $('#Head').text();
 var param = "Name";
+if (rate >= 1 && rate <=1){
 
 var searchCondition = {"Name" : $('#Head').text()};
     
@@ -187,4 +192,8 @@ $("#Info").append("Comment: " + comment);
 $("#Info").listview('refresh');
 $('#username').empty();
 $('#rating').empty();
-return false}
+}
+else{
+	$("#Info").append("Message:  Your rate is not valid!!");
+}
+}
