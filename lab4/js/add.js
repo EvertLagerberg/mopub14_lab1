@@ -40,21 +40,34 @@ helper.insertDocument("Rest", dataObject, null, function(resp) {
 });
 }
 
-function getContent(rest){
+
+function getContent(Name, Image,Desc, Category, Minprice, Maxprice, votesMean, commentlist){
+	var Comment="";
 	$("#Head").empty();
 	$("#Info").empty();
+	console.log("test3 = " +commentlist.length);
 	$("#Comment").ready(function() {
-		$( "#Head" ).append(rest.Name);
+		$( "#Head" ).append(Name);
 		$( "#Info" ).append(
-		" <li><img src = "+ rest.Image +">"
-		+"Description: "+rest.Desc+"<br/>"
-		+"Category: "+rest.Category+"<br/>"+
-		+ rest.Minprice + " - " + rest.Maxprice + " kr" + "<br>" +
-		"<br/></li>"
+		" <li><img src = "+ Image +">"
+		+"Description: "+Desc+"<br/>"
+		+"Category: "+Category+"<br/>"+
+		+ Minprice + " - " + Maxprice + " kr" + "<br>" +
+		"Votesmean: " + votesMean+"<br/></li>"
 		
 		);
+		for (var i=0;i<commentlist.length; i++) {
+			
+			if (commentlist[i] != ","){
+				Comment = Comment+commentlist[i];
+			}
+			else{
+				$("#Info").append("<li> Comment: " + Comment + "</li>");
+				Comment = "";
+			}
+			}
 		});
-	$("#Info").listview('refresh');
+	$("#Info").listview('refresh')
 	}
 
 function getData(){	
@@ -69,7 +82,7 @@ helper.setPassword(hex_md5("etlab5"));
 		for (index in resp.outputData){
         		var rest = resp.outputData[index];
 
-        		var commentlist = "";
+        		var commentlist = new Array();
         		var votesTotal = 0;
         		console.log(rest.Comments[0]);
         		if (rest.Comments[0] != "["){
@@ -79,21 +92,18 @@ helper.setPassword(hex_md5("etlab5"));
 
         			votesTotal = votesTotal + rest.Comments[i][0];
         			console.log(votesTotal);
-
-        			
-        			commentlist = commentlist + "<br/>" + rest.Comments[i][1];
-
-
+        			console.log("addcomment = " + rest.Comments[i][1]);
+        			commentlist[i] = rest.Comments[i][1];
         		}
         		var votesMean = votesTotal/i;
         		console.log(votesMean);
                 console.log("Hej");
                 console.log($('#username').val());
         	}
-			
+			console.log("test1 = " +commentlist.length);
         		$("#result").append(
         			"<li>"+
-        			"<a onclick="+ '"' + "getContent("+"'"+rest.Name+"',"+"'"+rest.Image +"',"+"'"+rest.Desc +"',"+"'"+rest.Category +"',"+"'"+rest.Minprice+"',"+"'"+rest.Maxprice +"',"+"'"+commentlist +"'"+")" + '"' + "href='#Comment'><img src = "+ rest.Image +">"+
+        			"<a onclick="+ '"' + "getContent("+"'"+rest.Name+"',"+"'"+rest.Image +"',"+"'"+rest.Desc +"',"+"'"+rest.Category +"',"+"'"+rest.Minprice+"',"+"'"+rest.Maxprice +"',"+"'"+votesMean  +"',"+"'"+ commentlist +"'"+")" + '"' + "href='#Comment'><img src = "+ rest.Image +">"+
         				rest.Name+ "<br/>"+
         				rest.Desc+ "<br/>" +
         				rest.Category + "<br/>" +
@@ -156,7 +166,7 @@ var searchCondition = {"Name" : $('#Head').text()};
     helper.searchDocuments(searchCondition, "Rest", function(resp){
         for (index in resp.outputData){
                 var rest = resp.outputData[index];              
-                rest.Comments.push([comment,rate]);      	            
+                rest.Comments.push([rate,comment]);      	            
                 
                 var object = {
                 	 "Name" : rest.Name,
@@ -173,4 +183,8 @@ var searchCondition = {"Name" : $('#Head').text()};
                 helper.updateDocument(object, searchCondition, "Rest");
             }
     });
+$("#Info").append("Comment: " + comment);
+$("#Info").listview('refresh');
+$('#username').empty();
+$('#rating').empty();
 return false}
