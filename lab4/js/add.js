@@ -3,9 +3,9 @@
 
 function clicker() {
 
-var helper = new CBHelper("lab5et", "12099a8a0e647583d433bade71f6451b", new GenericHelper());
+var helper = new CBHelper("mopublab5", "0492aaaf03e451c3146cf2fe3f5d829e", new GenericHelper());
 // use the md5 library provided to set the password
-helper.setPassword(hex_md5("etlab5"));
+helper.setPassword(hex_md5("mopub"));
 
 var first = [3,"Good"];
 var second = [1,"yuck"];
@@ -53,7 +53,7 @@ function getContent(Name, Image,Desc, Category, Minprice, Maxprice, votesMean, c
 		+"Description: "+Desc+"<br/>"
 		+"Category: "+Category+"<br/>"+
 		+ Minprice + " - " + Maxprice + " kr" + "<br>" +
-		"Votesmean: " + votesMean+"<br/></li>"
+		"User Rating: " + votesMean+ "/5.0"+"<br/></li>"
 		
 		);
 		for (var i=0;i<commentlist.length; i++) {
@@ -75,11 +75,12 @@ function getContent(Name, Image,Desc, Category, Minprice, Maxprice, votesMean, c
 	$("#Info").listview('refresh')
 	}
 
-function getData(){	
+function getData(){
+console.log("getData")	
 
-var helper = new CBHelper("lab5et", "12099a8a0e647583d433bade71f6451b", new GenericHelper());
+var helper = new CBHelper("mopublab5", "0492aaaf03e451c3146cf2fe3f5d829e", new GenericHelper());
 // use the md5 library provided to set the password
-helper.setPassword(hex_md5("etlab5"));
+helper.setPassword(hex_md5("mopub"));
 
 	
 	helper.searchAllDocuments("Rest", function(resp){
@@ -94,12 +95,12 @@ helper.setPassword(hex_md5("etlab5"));
         			console.log("Tja");
         		for (var i=0;i<rest.Comments.length; i++) {
         			console.log(rest.Comments[i][1]);
-        			votesTotal = votesTotal + rest.Comments[i][0];
+        			votesTotal = votesTotal + parseFloat(rest.Comments[i][0]);
         			console.log(votesTotal);
         			console.log("addcomment = " + rest.Comments[i][1]);
         			commentlist[i] = rest.Comments[i][1];
         		}
-        		var votesMean = votesTotal/i;
+        		var votesMean = Math.round(100*votesTotal/i)/100;
         		console.log(votesMean);
                 
                 console.log($('#username').val());
@@ -107,11 +108,21 @@ helper.setPassword(hex_md5("etlab5"));
 			console.log("Hej ----------->" + commentlist );;
         		$("#result").append(
         			"<li>"+
-        			"<a onclick="+ '"' + "getContent("+"'"+rest.Name+"',"+"'"+rest.Image +"',"+"'"+rest.Desc +"',"+"'"+rest.Category +"',"+"'"+rest.Minprice+"',"+"'"+rest.Maxprice +"',"+"'"+votesMean  +"',"+"'"+ commentlist +"'"+")" + '"' + "href='#Comment'><img src = "+ rest.Image +">"+
+        			"<a onclick="+ '"' + "getContent("+
+                        "'"+rest.Name+"',"+
+                        "'"+rest.Image +"',"+
+                        "'"+rest.Desc +"',"+
+                        "'"+rest.Category +"',"+
+                        "'"+rest.Minprice+"',"+
+                        "'"+rest.Maxprice +"',"+
+                        "'"+votesMean  +"',"+
+                        "'"+ commentlist +"'"+")"+
+                        '"' + "href='#Comment'><img src = "+ rest.Image +">"+
         				rest.Name+ "<br/>"+
         				rest.Desc+ "<br/>" +
         				rest.Category + "<br/>" +
         				rest.Minprice + " - " + rest.Maxprice + " kr" + "<br>" +
+                        "User Rating: " + votesMean+ "/5.0"+"<br/>"+
 					"</a></li>"
         		);
         	}
@@ -122,9 +133,9 @@ return false;}
 
 function getSearchData(){	
 
-var helper = new CBHelper("lab5et", "12099a8a0e647583d433bade71f6451b", new GenericHelper());
+var helper = new CBHelper("mopublab5", "0492aaaf03e451c3146cf2fe3f5d829e", new GenericHelper());
 // use the md5 library provided to set the password
-helper.setPassword(hex_md5("etlab5"));
+helper.setPassword(hex_md5("mopub"));
 	$("#result").empty();
 	var searchValue = $("#searchValue").val();
 	var param = $("#param").val();
@@ -156,15 +167,15 @@ return false;}
 
 function updateObject() {
 
-var helper = new CBHelper("lab5et", "12099a8a0e647583d433bade71f6451b", new GenericHelper());
+var helper = new CBHelper("mopublab5", "0492aaaf03e451c3146cf2fe3f5d829e", new GenericHelper());
 // use the md5 library provided to set the password
-helper.setPassword(hex_md5("etlab5"));
+helper.setPassword(hex_md5("mopub"));
 
 var comment = $('#username').val();
-var rate = $('#rating').val();
+var rate = parseInt($('#rating').val());
 var SearchValue = $('#Head').text();
 var param = "Name";
-if (rate >= 1 && rate <=1){
+if (rate >= 1 && rate <=5){
 
 var searchCondition = {"Name" : $('#Head').text()};
     
@@ -188,7 +199,7 @@ var searchCondition = {"Name" : $('#Head').text()};
                 helper.updateDocument(object, searchCondition, "Rest");
             }
     });
-$("#Info").append("Comment: " + comment);
+$("#Info").append("<li>Comment: " + comment + "</li>");
 $("#Info").listview('refresh');
 $('#username').empty();
 $('#rating').empty();
