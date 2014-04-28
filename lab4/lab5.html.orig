@@ -28,8 +28,8 @@
 	
 <body>
 <div data-role="page" id="page-contents">
-        <div data-role="header" id="bar" data-position="fixed">
-            <h1 id="header">Good Food</h1>
+        <div data-role="header" data-position="fixed">
+            <h1>Good Food</h1>
              <a href="#Setting"
              	data-theme="e"
                 data-role="button"
@@ -59,17 +59,18 @@
 
 <div data-role="page" id="Comment">
         <div data-role="header" data-position="fixed">
-            <h1 id="Head" value="tja">Pizza C:o</h1>
+            <h1 id="Head"></h1>
             <a href="#page-contents"
                 data-role="button"
                 class="ui-btn-left"
                 data-icon="arrow-l">Back</a>
         </div>
+<<<<<<< HEAD
         <div data-role="content"> 
               <div class="table">
                
-                <input id="username" type="text" placeholder="enter your comment here" data-mini="true">
-                <input id="rating" name="rating" type="text" placeholder="Enter rating 1-5" data-mini="true">
+                <input id="username" name="username" type="text" placeholder="enter your comment here" data-mini="true" value= "My favorite!">
+                <input id="rating" name="rating" type="text" placeholder="Enter rating 1-5" data-mini="true" value="3">
 
 
               </div>
@@ -78,9 +79,13 @@
               <!-- Button -->
               <div class="table">
 
-                <button id="buttonSend" name="buttonSend" onclick="updateObject()">Send</button>
+                <button id="buttonSend" name="buttonSend">Send</button>
 
               </div>
+=======
+        <div data-role="content">  
+        <button onclick="getContent('Hej')">Get content</button>
+>>>>>>> 748490a9dce4b38062df19056fd606cd5e3c3548
         </div>
 </div>
 
