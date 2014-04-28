@@ -28,8 +28,8 @@
 	
 <body>
 <div data-role="page" id="page-contents">
-        <div data-role="header" id="bar" data-position="fixed">
-            <h1 id="header">Good Food</h1>
+        <div data-role="header" data-position="fixed">
+            <h1>Good Food</h1>
              <a href="#Setting"
              	data-theme="e"
                 data-role="button"
@@ -59,29 +59,37 @@
 
 <div data-role="page" id="Comment">
         <div data-role="header" data-position="fixed">
-            <h1 id="Head" value="tja">Pizza C:o</h1>
+            <h1 id="Head"></h1>
             <a href="#page-contents"
                 data-role="button"
                 class="ui-btn-left"
                 data-icon="arrow-l">Back</a>
         </div>
-        <div data-role="content"> 
-              <div class="table">
+
+        <div data-role="content">
+        	<div>
+        		 <ul data-role="listview" data-inset="true" id="Info">
+				 </ul>
+        	</div>
+        	<div id="message">
+        	</div>
+        	<div class="table">
                
-                <input id="username" type="text" placeholder="enter your comment here" data-mini="true">
+                <input id="username" name="username" type="text" placeholder="enter your comment here" data-mini="true">
                 <input id="rating" name="rating" type="text" placeholder="Enter rating 1-5" data-mini="true">
 
 
               </div>
+        	</div>  
+              
 
 
               <!-- Button -->
               <div class="table">
 
-                <button id="buttonSend" name="buttonSend" onclick="updateObject()">Send</button>
+                <button id="buttonSend" onclick="updateObject()" name="buttonSend">Send</button>
 
               </div>
-        </div>
 </div>
 
 </body>
